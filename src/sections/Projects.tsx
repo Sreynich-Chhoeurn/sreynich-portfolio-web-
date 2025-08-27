@@ -15,43 +15,40 @@ const Projects = () => {
       id: 1,
       title: 'Web Design E-commerce',
       description: 'A modern and responsive e-commerce solution developed using HTML and CSS',
-      image: 'public/image_project_web_design.png',
+      image: '/image_project_web_design.png',
       tags: ['HTML', 'CSS'],
       category: 'Front-End',
       liveUrl: 'https://web-design-iota-one.vercel.app/',
       githubUrl: 'https://github.com/Sreynich-Chhoeurn/web_design',
       featured: true
     },
-
-   {
+    {
       id: 2,
       title: 'Portfolio Website',
       description: 'Responsive portfolio with animations and dark mode',
-      image: 'public/image_project_portfolio.png',
+      image: '/image_project_portfolio.png',
       tags: ['React', 'Framer Motion', 'Tailwind'],
       category: 'Front-End',
       liveUrl: '#',
       githubUrl: 'https://github.com/Sreynich-Chhoeurn/sreynich-portfolio-web-/deployments',
       featured: false
     },
-
     {
       id: 3,
       title: 'Weather App',
       description: 'Interactive weather dashboard with charts and forecasts',
       image: 'https://images.pexels.com/photos/1118873/pexels-photo-1118873.jpeg?auto=compress&cs=tinysrgb&w=800',
-      tags: ['HTML', 'CSS', 'JavaScript', 'Weather API' ],
+      tags: ['HTML', 'CSS', 'JavaScript', 'Weather API'],
       category: 'Front-End',
       liveUrl: 'https://wheatherapp-swart.vercel.app/',
       githubUrl: 'https://github.com/Dyy-Coding/G3-JavaScript-project-Wheather-App',
       featured: false
     },
-
     {
       id: 4,
       title: 'Task Management App',
       description: 'Collaborative task management with real-time updates',
-      image: 'public/image_task_management.png',
+      image: '/image_task_management.png',
       tags: ['OOP'],
       category: 'Back-End',
       liveUrl: '#',
@@ -62,19 +59,18 @@ const Projects = () => {
       id: 5,
       title: 'POS System',
       description: 'Point-of-sale platform for seamless sales, inventory, and payment management',
-      image: 'public/image_pos_system.png',
+      image: '/image_pos_system.png',
       tags: ['PHP, Database'],
       category: 'Full-Stack',
       liveUrl: 'http://localhost:8080/login',
       githubUrl: 'https://github.com/senghinloem/VC1-G3',
       featured: true
     },
-    
     {
       id: 6,
       title: 'QR Menu App',
       description: 'QR Menu app with a powerful admin panel for managing digital restaurant menus and orders.',
-      image: 'public/image_QR_menu_app.png',
+      image: '/image_QR_menu_app.png',
       tags: ['Flutter', 'Laravel', 'Database'],
       category: 'Full-Stack',
       liveUrl: '#',

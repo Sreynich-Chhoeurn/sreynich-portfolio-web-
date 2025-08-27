@@ -70,7 +70,7 @@ const About = () => {
             transition={{ delay: 0.2 }}
           >
             <img
-              src="public/image_about.png"
+              src="/image_about.png"
               alt="Sreynich working"
               className="w-full h-96 object-cover rounded-2xl shadow-lg"
             />
@@ -148,54 +148,55 @@ const About = () => {
           </div>
         </motion.div>
 
-      {/* Timeline */}
-          <motion.div
-            initial={{ y: 50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="mb-20"
-          >
-            <h3 className="text-3xl font-bold font-poppins text-center mb-12 gradient-text">
-              My Journey
-            </h3>
+        {/* Timeline */}
+        <motion.div
+          initial={{ y: 50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className="mb-20"
+        >
+          <h3 className="text-3xl font-bold font-poppins text-center mb-12 gradient-text">
+            My Journey
+          </h3>
+          
+          <div className="relative">
+            {/* Timeline Line */}
+            <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-500 via-mint-400 to-neon-500 transform -translate-x-1/2"></div>
             
-            <div className="relative">
-              {/* Timeline Line */}
-              <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-500 via-mint-400 to-neon-500 transform -translate-x-1/2"></div>
-              
-              <div className="space-y-12">
-                {timeline.map((item, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3 + index * 0.1 }}
-                    className={`flex items-center ${
-                      index === 0 || index === 2 ? 'md:justify-start' : 'md:justify-end'
-                    }`}
-                  >
-                    {/* Timeline Content */}
-                    <div className={`flex-1 w-1/2 p-6 ${
-                      index === 0 || index === 2 ? 'md:pr-8 md:text-left' : 'md:pl-8 md:text-right'
-                    }`}>
-                      <div className="glassmorphism rounded-xl p-6">
-                        <div className={`inline-block px-3 py-1 bg-gradient-to-r ${item.color} text-white text-sm font-semibold rounded-full mb-3`}>
-                          {item.year}
-                        </div>
-                        <h4 className="text-xl font-bold mb-2">{item.title}</h4>
-                        <p className="text-gray-600 dark:text-gray-300">{item.description}</p>
+            <div className="space-y-12">
+              {timeline.map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 + index * 0.1 }}
+                  className={`flex items-center ${
+                    index === 0 || index === 2 ? 'md:justify-start' : 'md:justify-end'
+                  }`}
+                >
+                  {/* Timeline Content */}
+                  <div className={`flex-1 w-1/2 p-6 ${
+                    index === 0 || index === 2 ? 'md:pr-8 md:text-left' : 'md:pl-8 md:text-right'
+                  }`}>
+                    <div className="glassmorphism rounded-xl p-6">
+                      <div className={`inline-block px-3 py-1 bg-gradient-to-r ${item.color} text-white text-sm font-semibold rounded-full mb-3`}>
+                        {item.year}
                       </div>
+                      <h4 className="text-xl font-bold mb-2">{item.title}</h4>
+                      <p className="text-gray-600 dark:text-gray-300">{item.description}</p>
                     </div>
-                    
-                    {/* Timeline Dot */}
-                    <div className={`absolute left-1/2 w-4 h-4 bg-gradient-to-r ${item.color} rounded-full transform -translate-x-1/2 border-4 border-white dark:border-gray-800`}></div>
-                  </motion.div>
-                ))}
-              </div>
+                  </div>
+                  
+                  {/* Timeline Dot */}
+                  <div className={`absolute left-1/2 w-4 h-4 bg-gradient-to-r ${item.color} rounded-full transform -translate-x-1/2 border-4 border-white dark:border-gray-800`}></div>
+                </motion.div>
+              ))}
             </div>
-          </motion.div>
+          </div>
+        </motion.div>
+
         {/* Hobbies & Interests */}
         <motion.div
           initial={{ y: 50, opacity: 0 }}

@@ -23,7 +23,6 @@ const Home = () => {
   return (
     <section id="home" className="min-h-screen pt-16 relative overflow-hidden">
       <FloatingIcons />
-      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="flex flex-col lg:flex-row items-center justify-between min-h-[80vh]">
           {/* Hero Content */}
@@ -33,7 +32,7 @@ const Home = () => {
             transition={{ delay: 0.2 }}
             className="flex-1 max-w-2xl"
           >
-            <motion.h1 
+            <motion.h1
               className="text-5xl md:text-7xl font-bold font-poppins mb-6"
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -43,11 +42,8 @@ const Home = () => {
               <span className="gradient-text">
                 <AnimatedText text="Sreynich Chhoeurn" delay={500} />
               </span>
-              <span className="block text-3xl md:text-4xl mt-2">
-                👩‍💻
-              </span>
+              <span className="block text-3xl md:text-4xl mt-2"> 👩‍💻 </span>
             </motion.h1>
-
             <motion.p
               className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed"
               initial={{ y: 30, opacity: 0 }}
@@ -60,7 +56,6 @@ const Home = () => {
               </span>{' '}
               specializing in modern front-end & back-end solutions
             </motion.p>
-
             <motion.div
               className="flex flex-col sm:flex-row gap-4 mb-12"
               initial={{ y: 30, opacity: 0 }}
@@ -74,7 +69,6 @@ const Home = () => {
                 Explore Projects
                 <ArrowRight className="ml-2" size={20} />
               </button>
-              
               <button
                 onClick={handleDownloadCV}
                 className="inline-flex items-center px-8 py-4 glassmorphism text-gray-700 dark:text-gray-300 font-semibold rounded-full hover:bg-white/20 dark:hover:bg-black/20 transition-all duration-300"
@@ -83,7 +77,6 @@ const Home = () => {
                 <Download className="ml-2" size={20} />
               </button>
             </motion.div>
-
             <motion.div
               className="flex space-x-6"
               initial={{ y: 30, opacity: 0 }}
@@ -114,7 +107,6 @@ const Home = () => {
               </button>
             </motion.div>
           </motion.div>
-
           {/* Hero Image */}
           <motion.div
             initial={{ x: 100, opacity: 0 }}
@@ -129,12 +121,11 @@ const Home = () => {
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 <img
-                  src="public/image_home.png"
+                  src="/image_home.png"
                   alt="Sreynich Chhoeurn"
                   className="w-full h-full object-cover"
                 />
               </motion.div>
-              
               {/* Floating decorative elements */}
               <motion.div
                 className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-r from-primary-500 to-mint-400 rounded-full opacity-60"

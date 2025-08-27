@@ -165,7 +165,7 @@ const Resume = () => {
             <div className="glassmorphism rounded-xl p-6 mb-8">
               <div className="text-center mb-6">
                 <img
-                  src="public/image_resume.png"
+                  src="/image_resume.png"
                   alt="Sreynich Chhoeurn"
                   className="w-32 h-32 rounded-full mx-auto mb-4 object-cover"
                 />
