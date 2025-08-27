@@ -10,7 +10,6 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
-    "dom": "^0.0.3",
     "framer-motion": "^10.16.5",
     "lucide-react": "^0.294.0",
     "react": "^18.3.1",
