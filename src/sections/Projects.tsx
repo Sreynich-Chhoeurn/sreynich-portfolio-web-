@@ -31,7 +31,7 @@ const Projects = () => {
       tags: ['React', 'Framer Motion', 'Tailwind'],
       category: 'Front-End',
       liveUrl: '#',
-      githubUrl: '#',
+      githubUrl: 'https://github.com/Sreynich-Chhoeurn/sreynich-portfolio-web-/deployments',
       featured: false
     },
 
@@ -64,7 +64,7 @@ const Projects = () => {
       description: 'Point-of-sale platform for seamless sales, inventory, and payment management',
       image: 'public/image_pos_system.png',
       tags: ['PHP, Database'],
-      category: 'Full-Stack ',
+      category: 'Full-Stack',
       liveUrl: 'http://localhost:8080/login',
       githubUrl: 'https://github.com/senghinloem/VC1-G3',
       featured: true
