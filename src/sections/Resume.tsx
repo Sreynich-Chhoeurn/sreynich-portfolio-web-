@@ -86,6 +86,16 @@ const Resume = () => {
         'Improved DevOps processes to make the app secure and able to grow easily.',
       ],
     },
+        {
+      title: 'Cloud Hosting – WordPress Deployment',
+      role: 'DevOps | Solo Project',
+      technology: ' AWS, Linux Ubuntu, MobaXterm, WordPress',
+      location: 'Passerelles Numériques Cambodia',
+      achievements: [
+        'Deployed and managed WordPress on AWS EC2 using Linux Ubuntuand remote terminal tools',
+        'Showcased full DevOps skills by setting up servers, configuring DNS,and improving system performance.',
+      ],
+    },
     {
       title: 'Weather App',
       role: 'Front-End Developer',
