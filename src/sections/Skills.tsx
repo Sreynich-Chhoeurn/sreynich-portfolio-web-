@@ -16,6 +16,7 @@ const Skills = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   const hardSkills = [
+    { name: 'WordPress', level: 60, color: 'from-orange-500 to-red-500' },
     { name: 'HTML / CSS', level: 69, color: 'from-orange-500 to-red-500' },
     { name: 'Bootstrap 5', level: 65, color: 'from-orange-500 to-red-500' },
     { name: 'Tailwind CSS', level: 55, color: 'from-blue-400 to-cyan-400' },
@@ -50,7 +51,7 @@ const Skills = () => {
     {
       title: 'Tools & Platforms',
       icon: <Code size={20} />,
-      skills: ['Git/GitHub', 'VS Code', 'Figma', 'Jira', 'AI Tools', 'Vercel'],
+      skills: ['WordPress','Git/GitHub', 'VS Code', 'Figma', 'Jira', 'AI Tools', 'Vercel'],
       color: 'from-purple-500 to-pink-500',
     },
     {
