@@ -77,6 +77,17 @@ const Projects = () => {
       githubUrl: 'https://github.com/Samnoeun/Digital_Menu',
       featured: false
     },
+    {
+      id: 7,
+      title: 'Cloud Hosting - WordPress Deployment',
+      description: 'Deployed and customized WordPress websites on cloud hosting, ensuring smooth performance and usability.',
+      image: '/image_wordpress.png',
+      tags: ['AWS', 'Linux Ubuntu', 'MobaXterm', 'WordPress'],
+      category: 'Full-Stack',
+      liveUrl: 'http://52.91.90.239/',
+      githubUrl: '#',
+      featured: false
+    },
   ];
 
   const filters = ['All', 'Front-End', 'Back-End', 'Full-Stack'];
