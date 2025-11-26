@@ -8,8 +8,8 @@ const Home = () => {
   const handleDownloadCV = () => {
     // Create a dummy CV download
     const link = document.createElement('a');
-    link.href = 'https://www.canva.com/design/DAGutfpvCOI/L3f3regeQmlYp2qN0wRdYQ/edit?utm_content=DAGutfpvCOI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton';
-    link.download = 'sreynich_chhoeurn_cv.pdf';
+    link.href = '/Sreynich_Chhoeurn_CV.pdf';
+    link.download = 'Sreynich_Chhoeurn_CV.pdf';
     link.click();
   };
 
@@ -42,7 +42,6 @@ const Home = () => {
               <span className="gradient-text">
                 <AnimatedText text="Sreynich Chhoeurn" delay={500} />
               </span>
-              <span className="block text-3xl md:text-4xl mt-2"> 👩‍💻 </span>
             </motion.h1>
             <motion.p
               className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed"
