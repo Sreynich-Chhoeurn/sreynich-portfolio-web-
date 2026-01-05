@@ -13,34 +13,40 @@ const About = () => {
     {
       year: '2022',
       title: 'Started Coding Journey',
-      description: 'Discovered my passion for web development during high school',
+      description: 'Discovered my passion for web development<br>while in high school.',
       color: 'from-primary-500 to-mint-400',
     },
     {
       year: '2023',
       title: 'Joined Passerelles Numériques Cambodia',
-      description: 'Began formal education in computer science and web development',
+      description: 'Began formal education in computer science<br>and web development.',
       color: 'from-mint-500 to-neon-400',
     },
     {
       year: '2024',
       title: 'First Project',
-      description: 'Gained experience in front-end development',
+      description: 'Completed my first front-end project,<br>gaining hands-on development experience.',
       color: 'from-neon-500 to-primary-400',
     },
     {
       year: '2025',
-      title: 'Actively Seeking Internship Opportunities',
-      description: 'Ready to apply skills and grow through experience.',
+      title: 'Internship Experience',
+      description: 'Worked on real web projects,<br>enhancing skills in both front-end<br>and back-end development.',
       color: 'from-primary-500 to-purple-400',
+    },
+    {
+      year: '2026',
+      title: 'State Exam & Graduation',
+      description: 'Preparing for the state exam<br>to graduate and begin my professional<br>career in web development.',
+      color: 'from-neon-500 to-primary-400',
     },
   ];
 
   const hobbies = [
-    { icon: <Lightbulb size={24} />, name: 'UI/UX Design', description: 'Creating beautiful interfaces' },
-    { icon: <Users size={24} />, name: 'Team Collaboration', description: 'Working with diverse teams' },
-    { icon: <Coffee size={24} />, name: 'Focus & Code', description: 'Maintaining concentration for effective coding' },
-    { icon: <Music size={24} />, name: 'Research', description: 'Exploring emerging technologies and innovative ideas.' },
+    { icon: <Lightbulb size={24} />, name: 'UI/UX Design', description: 'Creating beautiful interfaces', color: 'from-primary-500 to-mint-400' },
+    { icon: <Users size={24} />, name: 'Team Collaboration', description: 'Working with diverse teams', color: 'from-mint-500 to-neon-400' },
+    { icon: <Coffee size={24} />, name: 'Focus & Code', description: 'Maintaining concentration for effective coding', color: 'from-neon-500 to-primary-400' },
+    { icon: <Music size={24} />, name: 'Research', description: 'Exploring emerging technologies and innovative ideas.', color: 'from-primary-500 to-purple-400' },
   ];
 
   return (
@@ -160,40 +166,37 @@ const About = () => {
             My Journey
           </h3>
           
-          <div className="relative">
+          <div className="relative space-y-12">
             {/* Timeline Line */}
             <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-500 via-mint-400 to-neon-500 transform -translate-x-1/2"></div>
             
-            <div className="space-y-12">
-              {timeline.map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 + index * 0.1 }}
-                  className={`flex items-center ${
-                    index === 0 || index === 2 ? 'md:justify-start' : 'md:justify-end'
-                  }`}
-                >
-                  {/* Timeline Content */}
-                  <div className={`flex-1 w-1/2 p-6 ${
-                    index === 0 || index === 2 ? 'md:pr-8 md:text-left' : 'md:pl-8 md:text-right'
-                  }`}>
-                    <div className="glassmorphism rounded-xl p-6">
-                      <div className={`inline-block px-3 py-1 bg-gradient-to-r ${item.color} text-white text-sm font-semibold rounded-full mb-3`}>
-                        {item.year}
-                      </div>
-                      <h4 className="text-xl font-bold mb-2">{item.title}</h4>
-                      <p className="text-gray-600 dark:text-gray-300">{item.description}</p>
+            {timeline.map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 + index * 0.1 }}
+                className={`flex items-center ${index % 2 === 0 ? 'md:justify-start' : 'md:justify-end'} relative`}
+              >
+                {/* Timeline Content */}
+                <div className={`flex-1 w-1/2 p-6 ${index % 2 === 0 ? 'md:pr-8 md:text-left' : 'md:pl-8 md:text-right'}`}>
+                  <div className="glassmorphism rounded-xl p-6">
+                    <div className={`inline-block px-3 py-1 bg-gradient-to-r ${item.color} text-white text-sm font-semibold rounded-full mb-3`}>
+                      {item.year}
                     </div>
+                    <h4 className="text-xl font-bold mb-2">{item.title}</h4>
+                    <p
+                      className="text-gray-600 dark:text-gray-300"
+                      dangerouslySetInnerHTML={{ __html: item.description }}
+                    />
                   </div>
-                  
-                  {/* Timeline Dot */}
-                  <div className={`absolute left-1/2 w-4 h-4 bg-gradient-to-r ${item.color} rounded-full transform -translate-x-1/2 border-4 border-white dark:border-gray-800`}></div>
-                </motion.div>
-              ))}
-            </div>
+                </div>
+
+                {/* Timeline Dot */}
+                <div className={`absolute left-1/2 w-4 h-4 bg-gradient-to-r ${item.color} rounded-full transform -translate-x-1/2 border-4 border-white dark:border-gray-800`}></div>
+              </motion.div>
+            ))}
           </div>
         </motion.div>
 
@@ -215,7 +218,7 @@ const About = () => {
                 whileHover={{ scale: 1.05, y: -5 }}
                 className="glassmorphism rounded-xl p-6 text-center hover:shadow-lg transition-all duration-300"
               >
-                <div className="w-12 h-12 bg-gradient-to-r from-primary-500 to-mint-400 rounded-full flex items-center justify-center mx-auto mb-4 text-white">
+                <div className={`w-12 h-12 bg-gradient-to-r ${hobby.color} rounded-full flex items-center justify-center mx-auto mb-4 text-white`}>
                   {hobby.icon}
                 </div>
                 <h4 className="font-semibold mb-2">{hobby.name}</h4>
