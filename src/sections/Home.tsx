@@ -40,7 +40,7 @@ const Home = () => {
             >
               Hi, I'm{' '}
               <span className="gradient-text">
-                <AnimatedText text="Sreynich Chhoeurn" delay={500} />
+                <AnimatedText text="Sreynich" delay={500} />
               </span>
             </motion.h1>
             <motion.p
@@ -51,7 +51,7 @@ const Home = () => {
             >
               A passionate{' '}
               <span className="text-primary-600 dark:text-primary-400 font-semibold">
-                Gen Z web developer
+                Gen Z Full-Stack Developer
               </span>{' '}
               specializing in modern front-end & back-end solutions
             </motion.p>

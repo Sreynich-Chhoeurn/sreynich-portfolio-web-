@@ -60,6 +60,32 @@ const Resume = () => {
     achievements: string[];
   }[] = [
     {
+      title: 'KD Capital Co., Ltd',
+      role: 'Full-Stack Developer',
+      technology: 'HTML, CSS, Tailwind CSS, JavaScript, PHP/Laravel, WordPress, GitHub, Figma',
+      period: '16 Feb 2026 - Present',
+      location: 'KD Global Management',
+      achievements: [
+        'Developed responsive and interactive web pages, including Home page with live countdown and Partner page with animated logos.',
+        'Integrated frontend components with backend CMS (WordPress/Laravel) for dynamic content updates.',
+        'Collaborated with team members to identify and resolve website issues, improving performance and user experience.',
+        'Maintained high code quality through documentation, version control',
+      ],
+    },
+    {
+      title: 'National Internet Goverment Forum 2025',
+      role: 'Web Development Intern',
+      technology: 'HTML, CSS, Tailwind CSS, JavaScript, PHP/Laravel, WordPress, GitHub, Figma',
+      period: '22 Oct 2025 - 04 Dec 2025',
+      location: 'Open Development Cambodia (ODC)',
+      achievements: [
+        'Developed responsive and interactive web pages, including Home page with live countdown and Partner page with animated logos.',
+        'Integrated frontend components with backend CMS (WordPress/Laravel) for dynamic content updates.',
+        'Collaborated with team members to identify and resolve website issues, improving performance and user experience.',
+        'Maintained high code quality through documentation, version control',
+      ],
+    },
+    {
       title: 'Virtual Company 2 (VC2) - QR Code Menu App',
       role: 'Flutter Mobile Developer',
       technology: 'Flutter & Laravel',
@@ -182,16 +208,14 @@ const Resume = () => {
                 <h3 className="text-2xl font-bold font-poppins gradient-text">
                   Sreynich Chhoeurn
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300">Web Developer</p>
+                <p className="text-gray-600 dark:text-gray-300">Full-Stack Developer</p>
               </div>
 
               <div className="space-y-3">
                 <div className="flex items-center text-gray-600 dark:text-gray-300">
                   <Mail size={16} className="mr-3 text-primary-600" />
                   <span className="text-sm">
-                    sreynich.chhoeurn@student.
-                    <br />
-                    passerellesnumeriques.org
+                    sreynich.chhoeurn.dev@gmail.com
                   </span>
                 </div>
                 <div className="flex items-center text-gray-600 dark:text-gray-300">

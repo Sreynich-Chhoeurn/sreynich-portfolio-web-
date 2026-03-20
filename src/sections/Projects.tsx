@@ -88,6 +88,28 @@ const Projects = () => {
       githubUrl: '#',
       featured: false
     },
+    {
+      id: 5,
+      title: 'National Internet Goverment Forum 2025',
+      description: 'The Cambodia IGF website promotes open and inclusive dialogue on internet governance and digital policy in Cambodia.',
+      image: '/image_camigf.png',
+      tags: ['HTML, CSS, Tailwind CSS, JavaScript, PHP/Laravel, WordPress, GitHub, Figma'],
+      category: 'Full-Stack',
+      liveUrl: 'https://www.cambodiaigf.kh/',
+      githubUrl: 'https://github.com/ODCambodia/camigf',
+      featured: true
+    },
+        {
+      id: 5,
+      title: 'KD Capital Co., Ltd',
+      description: 'KD CAPITAL Co., Ltd  is a Cambodian investment company focused on strategic partnerships and long-term growth.',
+      image: '/image_capital.png',
+      tags: ['WordPress, Laragon'],
+      category: 'Full-Stack',
+      liveUrl: 'https://kdcapitalgrp.com/',
+      githubUrl: '',
+      featured: true
+    },
   ];
 
   const filters = ['All', 'Front-End', 'Back-End', 'Full-Stack'];

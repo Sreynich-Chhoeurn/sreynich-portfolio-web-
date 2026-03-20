@@ -33,6 +33,7 @@ const Skills = () => {
     { name: 'Data Analytics (Power BI)', level: 58, color: 'from-blue-400 to-cyan-400' },
     { name: 'Algorithms', level: 58, color: 'from-orange-500 to-red-500' },
     { name: 'Flutter', level: 60, color: 'from-orange-500 to-red-500' },
+    { name: 'Laragon', level: 70, color: 'from-orange-500 to-red-500' },
   ];
 
   const skillCategories = [
