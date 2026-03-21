@@ -40,6 +40,12 @@ const About = () => {
       description: 'Preparing for the state exam<br>to graduate and begin my professional<br>career in web development.',
       color: 'from-neon-500 to-primary-400',
     },
+        {
+      year: '2026',
+      title: 'Full-Stack Developer at KD Global Management',
+      description: 'Currently working as a Full-Stack Developer, developing and <br> maintaining web applications using modern technologies.',
+      color: 'from-neon-500 to-primary-400',
+    }
   ];
 
   const hobbies = [
