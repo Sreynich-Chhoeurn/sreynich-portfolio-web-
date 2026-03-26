@@ -22,8 +22,8 @@ const Resume = () => {
 
   const handleDownloadCV = () => {
     const link = document.createElement('a');
-    link.href = 'https://www.canva.com/design/DAGutfpvCOI/L3f3regeQmlYp2qN0wRdYQ/edit?utm_content=DAGutfpvCOI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton';
-    link.download = 'sreynich_chhoeurn_cv.pdf';
+    link.href = '/Sreynich_CHHOEURN_CV.pdf';
+    link.download = 'Sreynich_CHHOEURN_CV.pdf';
     link.click();
   };
 
@@ -66,10 +66,7 @@ const Resume = () => {
       period: '16 Feb 2026 - Present',
       location: 'KD Global Management',
       achievements: [
-        'Developed responsive and interactive web pages, including Home page with live countdown and Partner page with animated logos.',
-        'Integrated frontend components with backend CMS (WordPress/Laravel) for dynamic content updates.',
-        'Collaborated with team members to identify and resolve website issues, improving performance and user experience.',
-        'Maintained high code quality through documentation, version control',
+        '',
       ],
     },
     {
