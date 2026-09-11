@@ -1,7 +1,9 @@
+import { useLanguage } from '../context/LanguageContext';
 import React from 'react';
 import { motion } from 'framer-motion';
 
 const Preloader = () => {
+  const { t } = useLanguage();
   return (
     <motion.div
       initial={{ opacity: 1 }}
@@ -31,9 +33,7 @@ const Preloader = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1 }}
           className="text-white/80 mt-4 text-lg"
-        >
-          Loading amazing experiences...
-        </motion.p>
+        >{t("Loading amazing experiences...")}</motion.p>
       </div>
     </motion.div>
   );

@@ -10,6 +10,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 body {
@@ -78,3 +79,20 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 9998;
   transition: transform 0.15s ease;
 }
+/* Khmer glyphs need their own font and more vertical room for vowel marks. */
+html[lang="km"] body,
+html[lang="km"] h1,
+html[lang="km"] h2,
+html[lang="km"] h3,
+html[lang="km"] h4,
+html[lang="km"] h5,
+html[lang="km"] h6,
+html[lang="km"] .font-poppins,
+[lang="km"] {
+  font-family: 'Battambang', 'Inter', sans-serif;
+}
+
+html[lang="km"] body { line-height: 1.8; }
+html[lang="km"] :is(h1, h2, h3, h4, h5, h6) { line-height: 1.5; }
+html[lang="km"] .gradient-text { padding-block: 0.12em; }
+html[lang="km"] header a { white-space: nowrap; }

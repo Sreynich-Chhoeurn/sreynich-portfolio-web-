@@ -1,9 +1,11 @@
+import { useLanguage } from '../context/LanguageContext';
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { ExternalLink, Github, Eye, Filter } from 'lucide-react';
 
 const Projects = () => {
+  const { t } = useLanguage();
   const [activeFilter, setActiveFilter] = useState('All');
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -83,7 +85,7 @@ const Projects = () => {
       description: 'Deployed and customized WordPress websites on cloud hosting, ensuring smooth performance and usability.',
       image: '/image_wordpress.png',
       tags: ['AWS', 'Linux Ubuntu', 'MobaXterm', 'WordPress'],
-      category: 'Full-Stack',
+      category: 'Hosting',
       liveUrl: 'http://52.91.90.239/',
       githubUrl: '#',
       featured: false
@@ -105,14 +107,14 @@ const Projects = () => {
       description: 'KD CAPITAL Co., Ltd  is a Cambodian investment company focused on strategic partnerships and long-term growth.',
       image: '/image_capital.png',
       tags: ['WordPress, Laragon'],
-      category: 'Full-Stack',
+      category: 'Front-End',
       liveUrl: 'https://kdcapitalgrp.com/',
       githubUrl: '',
       featured: true
     },
   ];
 
-  const filters = ['All', 'Front-End', 'Back-End', 'Full-Stack'];
+  const filters = ['All', 'Front-End', 'Back-End', 'Full-Stack', 'Hosting'];
 
   const filteredProjects = activeFilter === 'All' 
     ? projects 
@@ -128,12 +130,8 @@ const Projects = () => {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <h2 className="text-5xl md:text-6xl font-bold font-poppins gradient-text mb-6">
-            My Projects
-          </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            A showcase of my recent work and creative solutions
-          </p>
+          <h2 className="text-5xl md:text-6xl font-bold font-poppins gradient-text mb-6">{t("My Projects")}</h2>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">{t("A showcase of my recent work and creative solutions")}</p>
         </motion.div>
 
         {/* Filter Buttons */}
@@ -157,7 +155,7 @@ const Projects = () => {
               }`}
             >
               <Filter size={16} className="inline mr-2" />
-              {filter}
+              {t(filter)}
             </motion.button>
           ))}
         </motion.div>
@@ -184,7 +182,7 @@ const Projects = () => {
                 <div className="relative overflow-hidden">
                   <img
                     src={project.image}
-                    alt={project.title}
+                    alt={t(project.title)}
                     className={`w-full transition-transform duration-500 hover:scale-110 ${
                       project.featured ? 'h-64' : 'h-48'
                     } object-cover`}
@@ -222,16 +220,14 @@ const Projects = () => {
                 
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-xl font-bold font-poppins">{project.title}</h3>
+                    <h3 className="text-xl font-bold font-poppins">{t(project.title)}</h3>
                     {project.featured && (
-                      <span className="px-2 py-1 bg-gradient-to-r from-primary-500 to-mint-400 text-white text-xs font-semibold rounded-full">
-                        Featured
-                      </span>
+                      <span className="px-2 py-1 bg-gradient-to-r from-primary-500 to-mint-400 text-white text-xs font-semibold rounded-full">{t("Featured")}</span>
                     )}
                   </div>
                   
                   <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
-                    {project.description}
+                    {t(project.description)}
                   </p>
                   
                   <div className="flex flex-wrap gap-2 mb-4">
@@ -251,17 +247,13 @@ const Projects = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex-1 px-4 py-2 bg-gradient-to-r from-primary-600 to-mint-500 text-white text-center rounded-lg font-medium hover:shadow-lg transition-all duration-300"
-                    >
-                      View Live
-                    </a>
+                    >{t("View Live")}</a>
                     <a
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="px-4 py-2 glassmorphism rounded-lg font-medium hover:bg-white/20 dark:hover:bg-black/20 transition-all duration-300"
-                    >
-                      Code
-                    </a>
+                    >{t("Code")}</a>
                   </div>
                 </div>
               </motion.div>
@@ -275,9 +267,7 @@ const Projects = () => {
             animate={{ opacity: 1 }}
             className="text-center py-20"
           >
-            <p className="text-xl text-gray-500 dark:text-gray-400">
-              No projects found for this category.
-            </p>
+            <p className="text-xl text-gray-500 dark:text-gray-400">{t("No projects found for this category.")}</p>
           </motion.div>
         )}
       </div>

@@ -1,50 +1,45 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { Heart, Target, Lightbulb, Users, Coffee, Music } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
+import React, { useState } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
+import '../styles/about.css';
+import '../styles/journey.css';
+import { Heart, Lightbulb, Users, User, Coffee, Music, GraduationCap, Code2, TrendingUp, Briefcase, Layers } from 'lucide-react';
 
 const About = () => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
+  const { t, language } = useLanguage();
+  const [selectedMilestone, setSelectedMilestone] = useState<number | null>(null);
+  const reduceMotion = useReducedMotion();
 
   const timeline = [
     {
       year: '2022',
       title: 'Started Coding Journey',
       description: 'Discovered my passion for web development<br>while in high school.',
-      color: 'from-primary-500 to-mint-400',
     },
     {
       year: '2023',
       title: 'Joined Passerelles Numériques Cambodia',
       description: 'Began formal education in computer science<br>and web development.',
-      color: 'from-mint-500 to-neon-400',
     },
     {
       year: '2024',
       title: 'First Project',
       description: 'Completed my first front-end project,<br>gaining hands-on development experience.',
-      color: 'from-neon-500 to-primary-400',
     },
     {
       year: '2025',
       title: 'Internship Experience',
       description: 'Worked on real web projects,<br>enhancing skills in both front-end<br>and back-end development.',
-      color: 'from-primary-500 to-purple-400',
     },
     {
       year: '2026',
       title: 'State Exam & Graduation',
       description: 'Preparing for the state exam<br>to graduate and begin my professional<br>career in web development.',
-      color: 'from-neon-500 to-primary-400',
     },
         {
       year: '2026',
       title: 'Full-Stack Developer at KD Global Management',
       description: 'Currently working as a Full-Stack Developer, developing and <br> maintaining web applications using modern technologies.',
-      color: 'from-neon-500 to-primary-400',
     }
   ];
 
@@ -56,155 +51,90 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="py-20 bg-gradient-to-b from-transparent to-purple-50/30 dark:to-purple-900/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Hero Section */}
-        <motion.div
-          initial={{ y: 50, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-center mb-20"
-        >
-          <h2 className="text-5xl md:text-6xl font-bold font-poppins gradient-text mb-6">
-            About Me
-          </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Get to know the person behind the code
-          </p>
-        </motion.div>
-
-        {/* Personal Story */}
-        <div className="grid lg:grid-cols-2 gap-12 mb-20">
-          <motion.div
-            initial={{ x: -50, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-          >
-            <img
-              src="/image_about.png"
-              alt="Sreynich working"
-              className="w-full h-96 object-cover rounded-2xl shadow-lg"
-            />
-          </motion.div>
-          
-          <motion.div
-            initial={{ x: 50, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-            className="space-y-6"
-          >
-            <h3 className="text-3xl font-bold font-poppins text-gray-800 dark:text-white">
-              My Journey in Tech
-            </h3>
-            <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-              As a young woman in tech, I've always been passionate about breaking barriers and 
-              creating innovative solutions. My journey started during high school when I wrote 
-              my first line of code and fell in love with the endless possibilities of programming.
-            </p>
-            <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-              At Passerelles Numériques Cambodia, I discovered my true calling in web development. 
-              The combination of creativity and logic, the ability to bring ideas to life through 
-              code, and the opportunity to solve real-world problems drives my passion every day.
-            </p>
-            <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-              Today, I specialize in modern web technologies and am committed to creating 
-              inclusive, accessible, and beautiful digital experiences that make a difference.
-            </p>
-          </motion.div>
+    <section id="about" className="portfolio-about" aria-labelledby="about-heading">
+      <div className="about-decoration-dots" aria-hidden="true" />
+      <div className="about-decoration-ring" aria-hidden="true" />
+      <div className="portfolio-container">
+        <div className="about-heading">
+          <h2 id="about-heading">{language === 'en' ? <>About <span>Me</span></> : t('About Me')}</h2>
+          <p>{t('Get to know the person behind the code')}</p>
+          <div className="about-heading-rule" aria-hidden="true" />
         </div>
 
-        {/* Values & Vision */}
-        <motion.div
-          ref={ref}
-          initial={{ y: 50, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true }}
-          className="glassmorphism rounded-3xl p-8 mb-20"
-        >
-          <h3 className="text-3xl font-bold font-poppins text-center mb-12 gradient-text">
-            Values & Vision
-          </h3>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-r from-primary-500 to-mint-400 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Heart className="text-white" size={28} />
-              </div>
-              <h4 className="text-xl font-semibold mb-3">Passion-Driven</h4>
-              <p className="text-gray-600 dark:text-gray-300">
-                Every project is an opportunity to create something meaningful and impactful.
-              </p>
+        <div className="about-intro">
+          <div className="about-photo-wrap">
+            <div className="about-photo-frame">
+              <img src="/image_about.png" alt={t('Sreynich Chhoeurn')} loading="lazy" width="960" height="1280" />
             </div>
-            
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-r from-mint-500 to-neon-400 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Target className="text-white" size={28} />
-              </div>
-              <h4 className="text-xl font-semibold mb-3">Goal-Oriented</h4>
-              <p className="text-gray-600 dark:text-gray-300">
-                Focused on delivering high-quality solutions that exceed expectations.
-              </p>
-            </div>
-            
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-r from-neon-500 to-primary-400 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users className="text-white" size={28} />
-              </div>
-              <h4 className="text-xl font-semibold mb-3">Collaborative</h4>
-              <p className="text-gray-600 dark:text-gray-300">
-                Believing in the power of teamwork and diverse perspectives.
-              </p>
+            <div className="about-education">
+              <GraduationCap size={32} aria-hidden="true" />
+              <div><strong>{t('Web Development')}</strong><p>Passerelles Numériques Cambodia</p></div>
             </div>
           </div>
-        </motion.div>
 
-        {/* Timeline */}
-        <motion.div
-          initial={{ y: 50, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-          className="mb-20"
-        >
-          <h3 className="text-3xl font-bold font-poppins text-center mb-12 gradient-text">
-            My Journey
-          </h3>
-          
-          <div className="relative space-y-12">
-            {/* Timeline Line */}
-            <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-500 via-mint-400 to-neon-500 transform -translate-x-1/2"></div>
-            
-            {timeline.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 + index * 0.1 }}
-                className={`flex items-center ${index % 2 === 0 ? 'md:justify-start' : 'md:justify-end'} relative`}
-              >
-                {/* Timeline Content */}
-                <div className={`flex-1 w-1/2 p-6 ${index % 2 === 0 ? 'md:pr-8 md:text-left' : 'md:pl-8 md:text-right'}`}>
-                  <div className="glassmorphism rounded-xl p-6">
-                    <div className={`inline-block px-3 py-1 bg-gradient-to-r ${item.color} text-white text-sm font-semibold rounded-full mb-3`}>
-                      {item.year}
+          <div className="about-copy">
+            <p className="about-hello">{t("Hi, I'm")}</p>
+            <h3 className="about-name"><span>{t(language === 'km' ? 'Chhoeurn' : 'Sreynich')}</span>{' '}<span>{t(language === 'km' ? 'Sreynich' : 'Chhoeurn')}</span></h3>
+            <p className="about-role"><Code2 size={25} aria-hidden="true" />{t('Full-Stack Developer')}</p>
+            <div className="about-story">
+              <p>{t("As a young woman in tech, I've always been passionate about breaking barriers and creating innovative solutions. My journey started during high school when I wrote my first line of code and fell in love with the endless possibilities of programming.")}</p>
+              <p>{t("At Passerelles Numériques Cambodia, I discovered my true calling in web development. The combination of creativity and logic, the ability to bring ideas to life through code, and the opportunity to solve real-world problems drives my passion every day.")}</p>
+              <p>{t("Today, I specialize in modern web technologies and am committed to creating inclusive, accessible, and beautiful digital experiences that make a difference.")}</p>
+            </div>
+            <ul className="about-strengths">
+              {[
+                { icon: Lightbulb, title: 'Problem Solver', detail: 'Turn ideas into solutions' },
+                { icon: TrendingUp, title: 'Continuous Learner', detail: 'Always growing' },
+                { icon: Users, title: 'Team Player', detail: 'Build better together' },
+                { icon: Heart, title: 'Passionate', detail: 'About technology' },
+              ].map(({ icon: Icon, title, detail }) => (
+                <li key={title}><Icon size={29} aria-hidden="true" /><div><h4>{t(title)}</h4><p>{t(detail)}</p></div></li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+
+        <section id="journey" className="journey-section" aria-labelledby="journey-heading">
+          <div className="journey-intro">
+            <span className="journey-kicker"><User size={19} aria-hidden="true" />{t('Learning & Experience')}</span>
+            <h3 id="journey-heading">{language === 'en' ? <>My <span>Journey</span></> : t('My Journey')}</h3>
+            <p>{t('From my first line of code to building real-world web applications.')}</p>
+            <div className="journey-intro-rule" aria-hidden="true" />
+            <div className="journey-current">
+              <Briefcase size={23} aria-hidden="true" />
+              <div><span>{t('Current role')}</span><strong>{t('Full-Stack Developer')}</strong><p>KD Global Management</p></div>
+            </div>
+          </div>
+          <ol className="journey-timeline">
+            {timeline.map((item, index) => {
+              const Icon = [Code2, GraduationCap, Layers, Briefcase, GraduationCap, Code2][index];
+              const current = index === timeline.length - 1;
+              return (
+                <li className={`journey-step${current ? ' journey-step-current' : ''}${selectedMilestone === index ? ' journey-step-selected' : ''}`} key={`${item.year}-${item.title}`}>
+                  <div className="journey-date"><time dateTime={item.year}>{item.year}</time></div>
+                  <span className="journey-marker" aria-hidden="true" />
+                  <motion.article className="journey-card"
+                    whileTap={reduceMotion ? undefined : { scale: 0.99 }}
+                    transition={{ duration: 0.16, ease: 'easeOut' }}>
+                    <button className="journey-card-select" type="button"
+                      aria-labelledby={`journey-title-${index}`}
+                      aria-describedby={`journey-description-${index}`}
+                      aria-pressed={selectedMilestone === index}
+                      onClick={() => setSelectedMilestone(value => value === index ? null : index)} />
+                    <span className="journey-icon"><Icon size={22} aria-hidden="true" /></span>
+                    <div className="journey-card-copy">
+                      {current && <span className="journey-status">{t('Current')}</span>}
+                      <h4 id={`journey-title-${index}`}>{t(item.title)}</h4>
+                      <p id={`journey-description-${index}`}>{t(item.description).replace(/<br\s*\/?\s*>/gi, ' ')}</p>
                     </div>
-                    <h4 className="text-xl font-bold mb-2">{item.title}</h4>
-                    <p
-                      className="text-gray-600 dark:text-gray-300"
-                      dangerouslySetInnerHTML={{ __html: item.description }}
-                    />
-                  </div>
-                </div>
+                  </motion.article>
+                </li>
+              );
+            })}
+          </ol>
+        </section>
 
-                {/* Timeline Dot */}
-                <div className={`absolute left-1/2 w-4 h-4 bg-gradient-to-r ${item.color} rounded-full transform -translate-x-1/2 border-4 border-white dark:border-gray-800`}></div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
 
         {/* Hobbies & Interests */}
         <motion.div
@@ -213,9 +143,7 @@ const About = () => {
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
         >
-          <h3 className="text-3xl font-bold font-poppins text-center mb-12 gradient-text">
-            When I'm Not Coding
-          </h3>
+          <h3 className="text-3xl font-bold font-poppins text-center mb-12 gradient-text">{t("When I'm Not Coding")}</h3>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {hobbies.map((hobby, index) => (
@@ -227,8 +155,8 @@ const About = () => {
                 <div className={`w-12 h-12 bg-gradient-to-r ${hobby.color} rounded-full flex items-center justify-center mx-auto mb-4 text-white`}>
                   {hobby.icon}
                 </div>
-                <h4 className="font-semibold mb-2">{hobby.name}</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-300">{hobby.description}</p>
+                <h4 className="font-semibold mb-2">{t(hobby.name)}</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-300">{t(hobby.description)}</p>
               </motion.div>
             ))}
           </div>
@@ -239,3 +167,8 @@ const About = () => {
 };
 
 export default About;
+
+
+
+
+

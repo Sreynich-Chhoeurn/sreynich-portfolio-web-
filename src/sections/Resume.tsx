@@ -1,3 +1,4 @@
+import { useLanguage } from '../context/LanguageContext';
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
@@ -13,6 +14,7 @@ import {
 } from 'lucide-react';
 
 const Resume = () => {
+  const { t } = useLanguage();
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -37,7 +39,7 @@ const Resume = () => {
     {
       degree: 'Associate degree',
       school: 'Passerelles Numériques Cambodia',
-      period: '2024 - Present',
+      period: '2024 - 2025',
       description:
         'Focused on Web Development, with additional studies in Software Engineering',
       gpa: '',
@@ -171,18 +173,14 @@ const Resume = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl md:text-6xl font-bold font-poppins gradient-text mb-6">
-            Resume
-          </h2>
+          <h2 className="text-5xl md:text-6xl font-bold font-poppins gradient-text mb-6">{t("Resume")}</h2>
           <motion.button
             onClick={handleDownloadCV}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-600 to-mint-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
           >
-            <Download className="mr-2" size={20} />
-            Download PDF
-          </motion.button>
+            <Download className="mr-2" size={20} />{t("Download PDF")}</motion.button>
         </motion.div>
 
         <div className="grid lg:grid-cols-3 gap-12">
@@ -199,13 +197,11 @@ const Resume = () => {
               <div className="text-center mb-6">
                 <img
                   src="/image_resume.png"
-                  alt="Sreynich Chhoeurn"
+                  alt={t("Sreynich Chhoeurn")}
                   className="w-32 h-32 rounded-full mx-auto mb-4 object-cover"
                 />
-                <h3 className="text-2xl font-bold font-poppins gradient-text">
-                  Sreynich Chhoeurn
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300">Full-Stack Developer</p>
+                <h3 className="text-2xl font-bold font-poppins gradient-text">{t("Sreynich Chhoeurn")}</h3>
+                <p className="text-gray-600 dark:text-gray-300">{t("Full-Stack Developer")}</p>
               </div>
 
               <div className="space-y-3">
@@ -221,7 +217,7 @@ const Resume = () => {
                 </div>
                 <div className="flex items-center text-gray-600 dark:text-gray-300">
                   <MapPin size={16} className="mr-3 text-primary-600" />
-                  <span className="text-sm">Phnom Penh, Cambodia</span>
+                  <span className="text-sm">{t("Phnom Penh, Cambodia")}</span>
                 </div>
               </div>
             </div>
@@ -229,9 +225,7 @@ const Resume = () => {
             {/* Skills Summary */}
             <div className="glassmorphism rounded-xl p-6 mb-8">
               <h4 className="text-xl font-bold mb-4 flex items-center">
-                <Award className="mr-2 text-primary-600" size={20} />
-                Key Skills
-              </h4>
+                <Award className="mr-2 text-primary-600" size={20} />{t("Key Skills")}</h4>
               <div className="space-y-2">
                 {[
                   'JavaScript/Vue.js',
@@ -244,7 +238,7 @@ const Resume = () => {
                     key={skill}
                     className="bg-gray-100 dark:bg-gray-800 px-3 py-2 rounded-lg text-sm"
                   >
-                    {skill}
+                    {t(skill)}
                   </div>
                 ))}
               </div>
@@ -253,9 +247,7 @@ const Resume = () => {
             {/* Certificates */}
             <div className="glassmorphism rounded-xl p-6">
               <h4 className="text-xl font-bold mb-4 flex items-center">
-                <Award className="mr-2 text-primary-600" size={20} />
-                Certificates
-              </h4>
+                <Award className="mr-2 text-primary-600" size={20} />{t("Certificates")}</h4>
               <div className="space-y-3">
                 {certificates.length > 0 ? (
                   certificates.map((cert, index) => (
@@ -267,11 +259,11 @@ const Resume = () => {
                       transition={{ delay: 0.5 + index * 0.1 }}
                       className="text-sm text-gray-600 dark:text-gray-300 border-l-2 border-primary-600 pl-3"
                     >
-                      {cert}
+                      {t(cert)}
                     </motion.div>
                   ))
                 ) : (
-                  <p className="text-sm text-gray-500">No certificates added yet.</p>
+                  <p className="text-sm text-gray-500">{t("No certificates added yet.")}</p>
                 )}
               </div>
             </div>
@@ -289,9 +281,7 @@ const Resume = () => {
             {/* Experience */}
             <div className="glassmorphism rounded-xl p-6 mb-8">
               <h4 className="text-2xl font-bold mb-6 flex items-center gradient-text">
-                <Briefcase className="mr-3" size={24} />
-                Project Experience
-              </h4>
+                <Briefcase className="mr-3" size={24} />{t("Project Experience")}</h4>
 
               <div className="space-y-8">
                 {experience.map((job, index) => (
@@ -306,21 +296,21 @@ const Resume = () => {
                     <div className="absolute w-4 h-4 bg-primary-600 rounded-full -left-2 top-0"></div>
 
                     <div className="mb-2">
-                      <h5 className="text-xl font-bold">{job.title}</h5>
-                      <p className="text-primary-600 font-semibold">{job.role}</p>
+                      <h5 className="text-xl font-bold">{t(job.title)}</h5>
+                      <p className="text-primary-600 font-semibold">{t(job.role)}</p>
                       <div className="flex flex-wrap items-center gap-2 text-gray-600 dark:text-gray-300 mb-2">
                         {job.period && (
                           <>
                             <span className="flex items-center">
                               <Calendar size={14} className="mr-1" />
-                              {job.period}
+                              {t(job.period)}
                             </span>
                             <span>•</span>
                           </>
                         )}
                         <span className="flex items-center">
                           <MapPin size={14} className="mr-1" />
-                          {job.location}
+                          {t(job.location)}
                         </span>
                       </div>
                     </div>
@@ -332,7 +322,7 @@ const Resume = () => {
                           className="text-gray-600 dark:text-gray-300 flex items-start"
                         >
                           <span className="w-2 h-2 bg-mint-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                          {achievement}
+                          {t(achievement)}
                         </li>
                       ))}
                     </ul>
@@ -344,9 +334,7 @@ const Resume = () => {
             {/* Education */}
             <div className="glassmorphism rounded-xl p-6 mb-8">
               <h4 className="text-2xl font-bold mb-6 flex items-center gradient-text">
-                <GraduationCap className="mr-3" size={24} />
-                Education
-              </h4>
+                <GraduationCap className="mr-3" size={24} />{t("Education")}</h4>
 
               <div className="space-y-6">
                 {education.map((edu, index) => (
@@ -360,22 +348,22 @@ const Resume = () => {
                   >
                     <div className="absolute w-4 h-4 bg-mint-500 rounded-full -left-2 top-0"></div>
 
-                    <h5 className="text-xl font-bold">{edu.degree}</h5>
+                    <h5 className="text-xl font-bold">{t(edu.degree)}</h5>
                     <div className="flex flex-wrap items-center gap-2 text-gray-600 dark:text-gray-300 mb-2">
-                      <span className="font-medium">{edu.school}</span>
+                      <span className="font-medium">{t(edu.school)}</span>
                       <span>•</span>
                       <span className="flex items-center">
                         <Calendar size={14} className="mr-1" />
-                        {edu.period}
+                        {t(edu.period)}
                       </span>
                       {edu.gpa && (
                         <>
                           <span>•</span>
-                          <span>GPA: {edu.gpa}</span>
+                          <span>{t("GPA:")}{edu.gpa}</span>
                         </>
                       )}
                     </div>
-                    <p className="text-gray-600 dark:text-gray-300">{edu.description}</p>
+                    <p className="text-gray-600 dark:text-gray-300">{t(edu.description)}</p>
                   </motion.div>
                 ))}
               </div>
@@ -384,9 +372,7 @@ const Resume = () => {
             {/* Achievements */}
             <div className="glassmorphism rounded-xl p-6">
               <h4 className="text-2xl font-bold mb-6 flex items-center gradient-text">
-                <Award className="mr-3" size={24} />
-                Achievements
-              </h4>
+                <Award className="mr-3" size={24} />{t("Achievements")}</h4>
 
               <div className="grid md:grid-cols-2 gap-4">
                 {achievements.map((achievement, index) => (
@@ -403,7 +389,7 @@ const Resume = () => {
                         size={16}
                         className="text-primary-600 mt-1 mr-2 flex-shrink-0"
                       />
-                      <span className="text-sm font-medium">{achievement}</span>
+                      <span className="text-sm font-medium">{t(achievement)}</span>
                     </div>
                   </motion.div>
                 ))}

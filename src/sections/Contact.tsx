@@ -1,9 +1,11 @@
+import { useLanguage } from '../context/LanguageContext';
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Mail, Phone, MapPin, Github, Linkedin, Facebook, Send, MessageSquare } from 'lucide-react';
 
 const Contact = () => {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -94,12 +96,8 @@ const Contact = () => {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <h2 className="text-5xl md:text-6xl font-bold font-poppins gradient-text mb-6">
-            Let's Work Together!
-          </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Have a project in mind or want to collaborate? I'd love to hear from you!
-          </p>
+          <h2 className="text-5xl md:text-6xl font-bold font-poppins gradient-text mb-6">{t("Let's Work Together!")}</h2>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">{t("Have a project in mind or want to collaborate? I'd love to hear from you!")}</p>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-16">
@@ -110,9 +108,7 @@ const Contact = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            <h3 className="text-3xl font-bold font-poppins mb-8 gradient-text">
-              Get in Touch
-            </h3>
+            <h3 className="text-3xl font-bold font-poppins mb-8 gradient-text">{t("Get in Touch")}</h3>
             
             <div className="space-y-6 mb-12">
               {contactInfo.map((info, index) => (
@@ -130,8 +126,8 @@ const Contact = () => {
                     {info.icon}
                   </div>
                   <div>
-                    <h4 className="font-semibold text-lg">{info.title}</h4>
-                    <p className="text-gray-600 dark:text-gray-300">{info.value}</p>
+                    <h4 className="font-semibold text-lg">{t(info.title)}</h4>
+                    <p className="text-gray-600 dark:text-gray-300">{t(info.value)}</p>
                   </div>
                 </motion.a>
               ))}
@@ -139,7 +135,7 @@ const Contact = () => {
 
             {/* Social Links */}
             <div className="mb-12">
-              <h4 className="text-xl font-bold mb-6">Follow Me</h4>
+              <h4 className="text-xl font-bold mb-6">{t("Follow Me")}</h4>
               <div className="flex space-x-4">
                 {socialLinks.map((social, index) => (
                   <motion.a
@@ -170,9 +166,7 @@ const Contact = () => {
             >
               <div className="glassmorphism rounded-xl p-6 text-center">
                 <MessageSquare size={32} className="mx-auto mb-3 text-primary-600" />
-                <p className="text-gray-600 dark:text-gray-300">
-                  Prefer to chat? Send me a message and I'll get back to you within 24 hours!
-                </p>
+                <p className="text-gray-600 dark:text-gray-300">{t("Prefer to chat? Send me a message and I'll get back to you within 24 hours!")}</p>
               </div>
             </motion.div>
           </motion.div>
@@ -186,7 +180,7 @@ const Contact = () => {
             transition={{ delay: 0.4 }}
           >
             <div className="glassmorphism rounded-xl p-8">
-              <h3 className="text-2xl font-bold font-poppins mb-6">Send Message</h3>
+              <h3 className="text-2xl font-bold font-poppins mb-6">{t("Send Message")}</h3>
               
               <form onSubmit={handleSubmit} className="space-y-6">
                 <motion.div
@@ -195,9 +189,7 @@ const Contact = () => {
                   viewport={{ once: true }}
                   transition={{ delay: 0.5 }}
                 >
-                  <label htmlFor="name" className="block text-sm font-medium mb-2">
-                    Name *
-                  </label>
+                  <label htmlFor="name" className="block text-sm font-medium mb-2">{t("Name *")}</label>
                   <input
                     type="text"
                     name="name"
@@ -206,7 +198,7 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     className="w-full px-4 py-3 glassmorphism rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
-                    placeholder="Your name"
+                    placeholder={t("Your name")}
                   />
                 </motion.div>
 
@@ -216,9 +208,7 @@ const Contact = () => {
                   viewport={{ once: true }}
                   transition={{ delay: 0.6 }}
                 >
-                  <label htmlFor="email" className="block text-sm font-medium mb-2">
-                    Email *
-                  </label>
+                  <label htmlFor="email" className="block text-sm font-medium mb-2">{t("Email *")}</label>
                   <input
                     type="email"
                     name="email"
@@ -227,7 +217,7 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     className="w-full px-4 py-3 glassmorphism rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
-                    placeholder="your.email@example.com"
+                    placeholder={t("your.email@example.com")}
                   />
                 </motion.div>
 
@@ -237,9 +227,7 @@ const Contact = () => {
                   viewport={{ once: true }}
                   transition={{ delay: 0.7 }}
                 >
-                  <label htmlFor="message" className="block text-sm font-medium mb-2">
-                    Message *
-                  </label>
+                  <label htmlFor="message" className="block text-sm font-medium mb-2">{t("Message *")}</label>
                   <textarea
                     name="message"
                     id="message"
@@ -248,7 +236,7 @@ const Contact = () => {
                     value={formData.message}
                     onChange={handleInputChange}
                     className="w-full px-4 py-3 glassmorphism rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300 resize-none"
-                    placeholder="Tell me about your project or just say hello!"
+                    placeholder={t("Tell me about your project or just say hello!")}
                   />
                 </motion.div>
 
@@ -269,14 +257,10 @@ const Contact = () => {
                         animate={{ rotate: 360 }}
                         transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                         className="w-5 h-5 border-2 border-white border-t-transparent rounded-full mr-2"
-                      />
-                      Sending...
-                    </>
+                      />{t("Sending...")}</>
                   ) : (
                     <>
-                      <Send size={20} className="mr-2" />
-                      Send Message
-                    </>
+                      <Send size={20} className="mr-2" />{t("Send Message")}</>
                   )}
                 </motion.button>
               </form>
@@ -288,8 +272,8 @@ const Contact = () => {
                   animate={{ opacity: 1, scale: 1 }}
                   className="mt-6 p-4 bg-green-100 dark:bg-green-900/20 border border-green-300 dark:border-green-700 rounded-lg text-green-800 dark:text-green-300 text-center"
                 >
-                  <p className="font-semibold">Message sent successfully! 🎉</p>
-                  <p className="text-sm mt-1">I'll get back to you within 24 hours.</p>
+                  <p className="font-semibold">{t("Message sent successfully! 🎉")}</p>
+                  <p className="text-sm mt-1">{t("I'll get back to you within 24 hours.")}</p>
                 </motion.div>
               )}
             </div>
