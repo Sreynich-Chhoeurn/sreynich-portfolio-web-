@@ -1,17 +1,75 @@
-import { useLanguage } from '../context/LanguageContext';
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { ExternalLink, Github, Eye, Filter } from 'lucide-react';
+import { motion, useReducedMotion } from 'framer-motion';
+import { ExternalLink, Github, Layers, Monitor, Server, Code2, Cloud, ArrowUpRight } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
+import '../styles/projects.css';
 
-const Projects = () => {
-  const { t } = useLanguage();
+const filters = [
+  { name: 'All', icon: Layers }, { name: 'Front-End', icon: Monitor },
+  { name: 'Back-End', icon: Server }, { name: 'Full-Stack', icon: Code2 }, { name: 'Hosting', icon: Cloud },
+];
+
+function publicLink(value: string) {
+  try {
+    const url = new URL(value);
+    return ['https:', 'http:'].includes(url.protocol) && !['localhost', '127.0.0.1'].includes(url.hostname);
+  } catch { return false; }
+}
+
+export default function Projects() {
+  const { t, language } = useLanguage();
   const [activeFilter, setActiveFilter] = useState('All');
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
+  const reduceMotion = useReducedMotion();
+  const filteredProjects = projects.filter(project => activeFilter === 'All' || project.category === activeFilter);
+  return (
+    <section id="projects" className="portfolio-projects" aria-labelledby="projects-heading">
+      <div className="portfolio-container">
+        <header className="projects-heading">
+          <div>
+            <span className="projects-eyebrow"><Layers size={18} aria-hidden="true" />{t('Selected Work')}</span>
+            <h2 id="projects-heading">{language === 'en' ? <>My <span>Projects</span></> : t('My Projects')}</h2>
+          </div>
+          <p>{t('A showcase of my recent work and creative solutions')}</p>
+        </header>
+        <div className="projects-toolbar">
+          <div className="projects-filters" role="group" aria-label={t('Filter projects')}>
+            {filters.map(({ name, icon: Icon }) => <button key={name} type="button" aria-pressed={name === activeFilter} onClick={() => setActiveFilter(name)}>
+              <Icon size={16} aria-hidden="true" /><span>{t(name)}</span><span className="projects-filter-count">{name === 'All' ? projects.length : projects.filter(project => project.category === name).length}</span>
+            </button>)}
+          </div>
+          <p className="projects-result" role="status">{filteredProjects.length} {t('projects shown')}</p>
+        </div>
+        <div className="projects-grid">
+          {filteredProjects.map(project => {
+            const hasLive = publicLink(project.liveUrl);
+            const hasCode = publicLink(project.githubUrl);
+            const tags = project.tags.flatMap(tag => tag.split(',').map(value => value.trim()));
+            return <motion.article key={project.title} className="project-card" initial={reduceMotion ? false : { opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .22 }}>
+              <div className="project-preview">
+                <div className="project-browser-bar" aria-hidden="true"><i /><i /><i /><span>{project.category}</span></div>
+                <div className="project-image-frame">
+                  <img src={project.image} alt={t(project.title)} loading="lazy" decoding="async" />
+                  {project.featured && <span className="project-featured">{t('Featured')}</span>}
+                </div>
+              </div>
+              <div className="project-card-body">
+                <span className="project-category">{t(project.category)}</span>
+                <h3>{t(project.title)}</h3>
+                <p className="project-description">{t(project.description)}</p>
+                <ul className="project-technologies" aria-label={t('Technologies used')}>{tags.map(tag => <li key={tag}>{tag}</li>)}</ul>
+                <div className="project-links">
+                  {hasLive && <a className="project-live" href={project.liveUrl} target="_blank" rel="noopener noreferrer" aria-label={`${t('View Live')} — ${t(project.title)}`}><span>{t('View Live')}</span><ArrowUpRight size={17} aria-hidden="true" /></a>}
+                  {hasCode && <a className="project-code" href={project.githubUrl} target="_blank" rel="noopener noreferrer" aria-label={`${t('Code')} — ${t(project.title)}`}><Github size={16} aria-hidden="true" /><span>{t('Code')}</span><ExternalLink size={13} aria-hidden="true" /></a>}
+                  {!hasLive && <span className="project-unavailable">{t('Live demo unavailable')}</span>}
+                </div>
+              </div>
+            </motion.article>;
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
   const projects = [
     {
       id: 1,
@@ -114,165 +172,3 @@ const Projects = () => {
     },
   ];
 
-  const filters = ['All', 'Front-End', 'Back-End', 'Full-Stack', 'Hosting'];
-
-  const filteredProjects = activeFilter === 'All' 
-    ? projects 
-    : projects.filter(project => project.category === activeFilter);
-
-  return (
-    <section id="projects" className="py-20 bg-gradient-to-b from-mint-50/30 to-neon-50/30 dark:from-mint-900/10 dark:to-neon-900/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Hero Section */}
-        <motion.div
-          initial={{ y: 50, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-center mb-20"
-        >
-          <h2 className="text-5xl md:text-6xl font-bold font-poppins gradient-text mb-6">{t("My Projects")}</h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">{t("A showcase of my recent work and creative solutions")}</p>
-        </motion.div>
-
-        {/* Filter Buttons */}
-        <motion.div
-          initial={{ y: 30, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-4 mb-16"
-        >
-          {filters.map((filter) => (
-            <motion.button
-              key={filter}
-              onClick={() => setActiveFilter(filter)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-                activeFilter === filter
-                  ? 'bg-gradient-to-r from-primary-600 to-mint-500 text-white shadow-lg'
-                  : 'glassmorphism text-gray-700 dark:text-gray-300 hover:bg-white/20 dark:hover:bg-black/20'
-              }`}
-            >
-              <Filter size={16} className="inline mr-2" />
-              {t(filter)}
-            </motion.button>
-          ))}
-        </motion.div>
-
-        {/* Projects Grid */}
-        <motion.div
-          ref={ref}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
-          <AnimatePresence>
-            {filteredProjects.map((project, index) => (
-              <motion.div
-                key={project.id}
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -10 }}
-                className={`glassmorphism rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 ${
-                  project.featured ? 'md:col-span-2 lg:col-span-2' : ''
-                }`}
-              >
-                <div className="relative overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={t(project.title)}
-                    className={`w-full transition-transform duration-500 hover:scale-110 ${
-                      project.featured ? 'h-64' : 'h-48'
-                    } object-cover`}
-                  />
-                  
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300">
-                    <div className="absolute bottom-4 left-4 right-4 flex space-x-3">
-                      <motion.a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.1 }}
-                        className="p-2 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-colors"
-                      >
-                        <ExternalLink size={20} />
-                      </motion.a>
-                      <motion.a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.1 }}
-                        className="p-2 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-colors"
-                      >
-                        <Github size={20} />
-                      </motion.a>
-                      <motion.button
-                        whileHover={{ scale: 1.1 }}
-                        className="p-2 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-colors"
-                      >
-                        <Eye size={20} />
-                      </motion.button>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-xl font-bold font-poppins">{t(project.title)}</h3>
-                    {project.featured && (
-                      <span className="px-2 py-1 bg-gradient-to-r from-primary-500 to-mint-400 text-white text-xs font-semibold rounded-full">{t("Featured")}</span>
-                    )}
-                  </div>
-                  
-                  <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
-                    {t(project.description)}
-                  </p>
-                  
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-sm rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                      >
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-                  
-                  <div className="flex space-x-3">
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 px-4 py-2 bg-gradient-to-r from-primary-600 to-mint-500 text-white text-center rounded-lg font-medium hover:shadow-lg transition-all duration-300"
-                    >{t("View Live")}</a>
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-4 py-2 glassmorphism rounded-lg font-medium hover:bg-white/20 dark:hover:bg-black/20 transition-all duration-300"
-                    >{t("Code")}</a>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
-
-        {filteredProjects.length === 0 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center py-20"
-          >
-            <p className="text-xl text-gray-500 dark:text-gray-400">{t("No projects found for this category.")}</p>
-          </motion.div>
-        )}
-      </div>
-    </section>
-  );
-};
-
-export default Projects;

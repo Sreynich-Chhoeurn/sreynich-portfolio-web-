@@ -1,34 +1,58 @@
-import { useLanguage } from '../context/LanguageContext';
 import React from 'react';
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import {
-  Download,
-  MapPin,
-  Mail,
-  Phone,
-  Calendar,
-  Award,
-  Briefcase,
-  GraduationCap,
-} from 'lucide-react';
+import { FileText, MapPin, Mail, Phone, Calendar, Award, Briefcase, GraduationCap, ArrowUpRight, ChevronDown, Code2 } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
+import '../styles/resume.css';
 
-const Resume = () => {
+export default function Resume() {
   const { t } = useLanguage();
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
-  const certificates: string[] = [];
-
-  const handleDownloadCV = () => {
-    const link = document.createElement('a');
-    link.href = '/Sreynich_CHHOEURN_CV.pdf';
-    link.download = 'Sreynich_CHHOEURN_CV.pdf';
-    link.click();
-  };
-
+  return (
+    <section id="resume" className="portfolio-resume" aria-labelledby="resume-heading">
+      <div className="portfolio-container">
+        <header className="resume-heading">
+          <div><span className="resume-eyebrow"><FileText size={17} aria-hidden="true" />{t('Career Overview')}</span><h2 id="resume-heading">{t('Resume')}</h2><p>{t('My experience, education, and the skills behind my work.')}</p></div>
+          <a className="resume-request" href="#contact">{t('Request CV')}<ArrowUpRight size={18} aria-hidden="true" /></a>
+        </header>
+        <div className="resume-layout">
+          <aside className="resume-sidebar">
+            <div className="resume-profile">
+              <div className="resume-profile-top"><img src="/image_resume.png" alt={t('Sreynich Chhoeurn')} loading="lazy" /><span className="resume-profile-mark" aria-hidden="true"><Code2 size={19} /></span></div>
+              <h3>{t('Sreynich Chhoeurn')}</h3><p className="resume-role">{t('Full-Stack Developer')}</p>
+              <ul className="resume-contact">
+                <li><Mail size={16} aria-hidden="true" /><a href="mailto:sreynich.chhoeurn.dev@gmail.com">sreynich.chhoeurn.dev@gmail.com</a></li>
+                <li><Phone size={16} aria-hidden="true" /><span>{t('Available Upon Request')}</span></li>
+                <li><MapPin size={16} aria-hidden="true" /><span>{t('Phnom Penh, Cambodia')}</span></li>
+              </ul>
+            </div>
+            <section className="resume-education" aria-labelledby="resume-education-heading">
+              <h3 id="resume-education-heading"><GraduationCap size={22} aria-hidden="true" />{t('Education')}</h3>
+              {education.map(edu => <article key={edu.degree}><span className="resume-date"><Calendar size={13} aria-hidden="true" />{t(edu.period)}</span><h4>{t(edu.degree)}</h4><p className="resume-school">{t(edu.school)}</p><p>{t(edu.description)}</p>{edu.gpa && <p>{t('GPA:')} {edu.gpa}</p>}</article>)}
+            </section>
+            <section className="resume-achievements" aria-labelledby="resume-achievements-heading"><h3 id="resume-achievements-heading"><Award size={21} aria-hidden="true" />{t('Achievements')}</h3>{achievements.map(achievement => <p key={achievement}>{t(achievement)}</p>)}</section>
+          </aside>
+          <section className="resume-experience" aria-labelledby="resume-experience-heading">
+            <div className="resume-section-heading"><span className="resume-section-icon"><Briefcase size={23} aria-hidden="true" /></span><div><h3 id="resume-experience-heading">{t('Professional & Project Experience')}</h3><p>{t('Open an entry to explore my contributions and technologies.')}</p></div></div>
+            <div className="resume-jobs">
+              {experience.map((job, index) => {
+                const contributions = job.achievements.filter(value => value.trim());
+                return <details className={`resume-job${index === 0 ? ' resume-job-current' : ''}`} key={job.title}>
+                  <summary>
+                    <span className="resume-job-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                    <div className="resume-job-summary"><div className="resume-job-meta">{job.period && <span className="resume-date"><Calendar size={13} aria-hidden="true" />{t(job.period)}</span>}{index === 0 && <span className="resume-current">{t('Current')}</span>}</div><h4>{t(job.role)}</h4><p>{t(job.title)}</p><span className="resume-organization"><MapPin size={13} aria-hidden="true" />{t(job.location)}</span></div>
+                    <ChevronDown className="resume-chevron" size={19} aria-hidden="true" />
+                  </summary>
+                  <div className="resume-job-details">
+                    {contributions.length > 0 && <ul className="resume-contributions">{contributions.map(item => <li key={item}>{t(item)}</li>)}</ul>}
+                    <div className="resume-technologies"><h5>{t('Technologies used')}</h5><ul>{job.technology.split(',').map(technology => <li key={technology.trim()}>{technology.trim()}</li>)}</ul></div>
+                  </div>
+                </details>;
+              })}
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+  );
+}
   const education: {
     degree: string;
     school: string;
@@ -160,246 +184,7 @@ const Resume = () => {
     'Associate Degree in Web Development at Passerelles Numériques Cambodia',
   ];
 
-  return (
-    <section
-      id="resume"
-      className="py-20 bg-gradient-to-b from-neon-50/30 to-purple-50/30 dark:from-neon-900/10 dark:to-purple-900/10"
-    >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <motion.div
-          initial={{ y: 50, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-5xl md:text-6xl font-bold font-poppins gradient-text mb-6">{t("Resume")}</h2>
-          <motion.button
-            onClick={handleDownloadCV}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-600 to-mint-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-          >
-            <Download className="mr-2" size={20} />{t("Download PDF")}</motion.button>
-        </motion.div>
 
-        <div className="grid lg:grid-cols-3 gap-12">
-          {/* Left Column - Personal Info */}
-          <motion.div
-            initial={{ x: -50, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="lg:col-span-1"
-          >
-            {/* Profile */}
-            <div className="glassmorphism rounded-xl p-6 mb-8">
-              <div className="text-center mb-6">
-                <img
-                  src="/image_resume.png"
-                  alt={t("Sreynich Chhoeurn")}
-                  className="w-32 h-32 rounded-full mx-auto mb-4 object-cover"
-                />
-                <h3 className="text-2xl font-bold font-poppins gradient-text">{t("Sreynich Chhoeurn")}</h3>
-                <p className="text-gray-600 dark:text-gray-300">{t("Full-Stack Developer")}</p>
-              </div>
 
-              <div className="space-y-3">
-                <div className="flex items-center text-gray-600 dark:text-gray-300">
-                  <Mail size={16} className="mr-3 text-primary-600" />
-                  <span className="text-sm">
-                    sreynich.chhoeurn.dev@gmail.com
-                  </span>
-                </div>
-                <div className="flex items-center text-gray-600 dark:text-gray-300">
-                  <Phone size={16} className="mr-3 text-primary-600" />
-                  <span className="text-sm">+855 97 698 2459</span>
-                </div>
-                <div className="flex items-center text-gray-600 dark:text-gray-300">
-                  <MapPin size={16} className="mr-3 text-primary-600" />
-                  <span className="text-sm">{t("Phnom Penh, Cambodia")}</span>
-                </div>
-              </div>
-            </div>
 
-            {/* Skills Summary */}
-            <div className="glassmorphism rounded-xl p-6 mb-8">
-              <h4 className="text-xl font-bold mb-4 flex items-center">
-                <Award className="mr-2 text-primary-600" size={20} />{t("Key Skills")}</h4>
-              <div className="space-y-2">
-                {[
-                  'JavaScript/Vue.js',
-                  'Node.js/Laravel',
-                  'MySQL/Database',
-                  'Git/GitHub',
-                  'Responsive Design/Prototyping',
-                ].map((skill) => (
-                  <div
-                    key={skill}
-                    className="bg-gray-100 dark:bg-gray-800 px-3 py-2 rounded-lg text-sm"
-                  >
-                    {t(skill)}
-                  </div>
-                ))}
-              </div>
-            </div>
 
-            {/* Certificates */}
-            <div className="glassmorphism rounded-xl p-6">
-              <h4 className="text-xl font-bold mb-4 flex items-center">
-                <Award className="mr-2 text-primary-600" size={20} />{t("Certificates")}</h4>
-              <div className="space-y-3">
-                {certificates.length > 0 ? (
-                  certificates.map((cert, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.5 + index * 0.1 }}
-                      className="text-sm text-gray-600 dark:text-gray-300 border-l-2 border-primary-600 pl-3"
-                    >
-                      {t(cert)}
-                    </motion.div>
-                  ))
-                ) : (
-                  <p className="text-sm text-gray-500">{t("No certificates added yet.")}</p>
-                )}
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Right Column - Experience & Education */}
-          <motion.div
-            ref={ref}
-            initial={{ x: 50, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-            className="lg:col-span-2"
-          >
-            {/* Experience */}
-            <div className="glassmorphism rounded-xl p-6 mb-8">
-              <h4 className="text-2xl font-bold mb-6 flex items-center gradient-text">
-                <Briefcase className="mr-3" size={24} />{t("Project Experience")}</h4>
-
-              <div className="space-y-8">
-                {experience.map((job, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.6 + index * 0.2 }}
-                    className="border-l-2 border-primary-600 pl-6 relative"
-                  >
-                    <div className="absolute w-4 h-4 bg-primary-600 rounded-full -left-2 top-0"></div>
-
-                    <div className="mb-2">
-                      <h5 className="text-xl font-bold">{t(job.title)}</h5>
-                      <p className="text-primary-600 font-semibold">{t(job.role)}</p>
-                      <div className="flex flex-wrap items-center gap-2 text-gray-600 dark:text-gray-300 mb-2">
-                        {job.period && (
-                          <>
-                            <span className="flex items-center">
-                              <Calendar size={14} className="mr-1" />
-                              {t(job.period)}
-                            </span>
-                            <span>•</span>
-                          </>
-                        )}
-                        <span className="flex items-center">
-                          <MapPin size={14} className="mr-1" />
-                          {t(job.location)}
-                        </span>
-                      </div>
-                    </div>
-
-                    <ul className="space-y-2">
-                      {job.achievements.map((achievement, achieveIndex) => (
-                        <li
-                          key={achieveIndex}
-                          className="text-gray-600 dark:text-gray-300 flex items-start"
-                        >
-                          <span className="w-2 h-2 bg-mint-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                          {t(achievement)}
-                        </li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
-            {/* Education */}
-            <div className="glassmorphism rounded-xl p-6 mb-8">
-              <h4 className="text-2xl font-bold mb-6 flex items-center gradient-text">
-                <GraduationCap className="mr-3" size={24} />{t("Education")}</h4>
-
-              <div className="space-y-6">
-                {education.map((edu, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.8 + index * 0.2 }}
-                    className="border-l-2 border-mint-500 pl-6 relative"
-                  >
-                    <div className="absolute w-4 h-4 bg-mint-500 rounded-full -left-2 top-0"></div>
-
-                    <h5 className="text-xl font-bold">{t(edu.degree)}</h5>
-                    <div className="flex flex-wrap items-center gap-2 text-gray-600 dark:text-gray-300 mb-2">
-                      <span className="font-medium">{t(edu.school)}</span>
-                      <span>•</span>
-                      <span className="flex items-center">
-                        <Calendar size={14} className="mr-1" />
-                        {t(edu.period)}
-                      </span>
-                      {edu.gpa && (
-                        <>
-                          <span>•</span>
-                          <span>{t("GPA:")}{edu.gpa}</span>
-                        </>
-                      )}
-                    </div>
-                    <p className="text-gray-600 dark:text-gray-300">{t(edu.description)}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
-            {/* Achievements */}
-            <div className="glassmorphism rounded-xl p-6">
-              <h4 className="text-2xl font-bold mb-6 flex items-center gradient-text">
-                <Award className="mr-3" size={24} />{t("Achievements")}</h4>
-
-              <div className="grid md:grid-cols-2 gap-4">
-                {achievements.map((achievement, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 1 + index * 0.1 }}
-                    className="bg-gradient-to-r from-primary-50 to-mint-50 dark:from-primary-900/20 dark:to-mint-900/20 p-4 rounded-lg border border-primary-200 dark:border-primary-800"
-                  >
-                    <div className="flex items-start">
-                      <Award
-                        size={16}
-                        className="text-primary-600 mt-1 mr-2 flex-shrink-0"
-                      />
-                      <span className="text-sm font-medium">{t(achievement)}</span>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-export default Resume;

@@ -34,7 +34,7 @@ const Home = () => {
             <div className="hero-connect">
               <div className="hero-socials" aria-label={t('Follow Me')}>
                 <a href="https://github.com/Sreynich-Chhoeurn" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><Github size={22} /></a>
-                <a href="https://www.linkedin.com/in/sreynich-chhoeurn-776b68344" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Linkedin size={21} /></a>
+                <a href="https://www.linkedin.com/in/sreynich-chhoeurn-a92119401/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Linkedin size={21} /></a>
                 <a href="#contact" aria-label={t('Contact')}><Mail size={23} /></a>
               </div>
             </div>
@@ -59,3 +59,4 @@ const Home = () => {
 };
 
 export default Home;
+

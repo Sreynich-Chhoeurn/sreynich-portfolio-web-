@@ -1,0 +1,33 @@
+.skills-soft { position: relative; isolation: isolate; margin-top: 58px; padding: 28px 0 20px; }
+.skills-soft::before, .skills-soft::after { content: ''; pointer-events: none; position: absolute; z-index: -1; width: 190px; height: 190px; border: 32px solid #00aaa312; outline: 25px solid #00aaa304; border-radius: 50%; }
+.skills-soft::before { top: -50px; left: -210px; }
+.skills-soft::after { bottom: -100px; right: -210px; }
+.soft-heading { position: relative; text-align: center; max-width: 700px; margin: 0 auto 26px; }
+.soft-eyebrow { display: inline-flex; align-items: center; gap: 9px; padding: 8px 16px; border: 1px solid #00aa980b; border-radius: 24px; color: var(--portfolio-teal); background: #00aa980b; font-size: 13px; font-weight: 650; }
+.soft-heading h3 { font-size: clamp(30px, 3vw, 46px); font-weight: 750; line-height: 1.25; letter-spacing: -.7px; margin-top: 14px; }
+.soft-heading h3 span { color: var(--portfolio-teal); }
+.soft-heading > p { font-size: 15px; line-height: 1.65; color: var(--portfolio-muted); margin-top: 10px; }
+.soft-heading::after { content: ''; display: block; width: 56px; height: 4px; margin: 14px auto 0; background: radial-gradient(circle at 53px 2px, var(--portfolio-teal) 2px, transparent 2.5px), linear-gradient(var(--portfolio-teal), var(--portfolio-teal)) left / 44px 4px no-repeat; border-radius: 4px; }
+.skills-soft-grid { gap: 18px; }
+.skills-soft .soft-card { --soft-accent: 0, 173, 153; display: flex; flex-direction: column; gap: 0; position: relative; isolation: isolate; overflow: hidden; padding: 18px 26px; border: 1px solid rgba(var(--soft-accent), .14); border-radius: 16px; background: var(--portfolio-surface); box-shadow: 0 7px 22px rgba(var(--soft-accent), .045); transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
+.skills-soft .soft-card:nth-child(2) { --soft-accent: 0, 158, 241; }
+.skills-soft .soft-card:nth-child(3) { --soft-accent: 155, 94, 238; }
+.skills-soft .soft-card:nth-child(5) { --soft-accent: 235, 164, 0; }
+.skills-soft .soft-card:nth-child(6) { --soft-accent: 0, 172, 204; }
+.skills-soft .soft-card:nth-child(7) { --soft-accent: 213, 62, 165; }
+.skills-soft .soft-card:nth-child(8) { --soft-accent: 101, 93, 242; }
+.soft-card::before { content: ''; position: absolute; pointer-events: none; inset: 0 auto 0 0; width: 6px; background: linear-gradient(90deg, rgba(var(--soft-accent), .45), rgb(var(--soft-accent))); }
+.soft-card::after { content: ''; position: absolute; z-index: -1; pointer-events: none; bottom: -12px; right: -15px; width: 125px; height: 105px; border-radius: 90% 0 0 0; background: rgba(var(--soft-accent), .045); transform: skewY(-18deg); box-shadow: -20px 28px 0 8px rgba(var(--soft-accent), .025); }
+.soft-card-top { display: flex; width: 100%; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.soft-card-icon { display: grid; place-items: center; width: 54px; height: 54px; border-radius: 18px; background: rgba(var(--soft-accent), .15); color: rgb(var(--soft-accent)); }
+.soft-card-icon svg { width: 30px; height: 30px; stroke-width: 2.2; }
+.soft-card-arrow { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; color: rgb(var(--soft-accent)); background: rgba(var(--soft-accent), .055); }
+.skills-soft .soft-card h4 { font-family: inherit; font-size: 16px; font-weight: 700; line-height: 1.45; }
+.skills-soft .soft-card p { font-size: 13px; line-height: 1.65; margin-top: 7px; margin-bottom: 14px; }
+.soft-card-line { width: 38px; height: 4px; flex-shrink: 0; border-radius: 3px; margin-top: auto; background: rgb(var(--soft-accent)); }
+.dark .soft-card-icon, .dark .soft-card-arrow { color: #d8e9f7; }
+html[lang='km'] .soft-heading h3 { font-family: 'Battambang', sans-serif; line-height: 1.6; letter-spacing: 0; }
+html[lang='km'] .skills-soft .soft-card h4, html[lang='km'] .skills-soft .soft-card p { line-height: 1.8; }
+@media (hover: hover) { .skills-soft .soft-card:hover { transform: translateY(-3px); border-color: rgba(var(--soft-accent), .4); box-shadow: 0 8px 24px rgba(var(--soft-accent), .09); } }
+@media (max-width: 650px) { .skills-soft { margin-top: 36px; padding-top: 24px; } .skills-soft .soft-card { padding: 20px 24px; } }
+@media (prefers-reduced-motion: reduce) { .skills-soft .soft-card { transition: none; } .skills-soft .soft-card:hover { transform: none; } }

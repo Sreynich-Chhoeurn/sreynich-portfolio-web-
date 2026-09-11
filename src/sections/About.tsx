@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import '../styles/about.css';
 import '../styles/journey.css';
-import { Heart, Lightbulb, Users, User, Coffee, Music, GraduationCap, Code2, TrendingUp, Briefcase, Layers } from 'lucide-react';
+import '../styles/interests.css';
+import { Heart, Lightbulb, Users, User, PenTool, Music, GraduationCap, Code2, TrendingUp, Briefcase, Layers } from 'lucide-react';
 
 const About = () => {
   const { t, language } = useLanguage();
@@ -33,20 +34,20 @@ const About = () => {
     },
     {
       year: '2026',
-      title: 'State Exam & Graduation',
+      title: 'State Examination & Associate Degree Graduation',
       description: 'Preparing for the state exam<br>to graduate and begin my professional<br>career in web development.',
     },
         {
       year: '2026',
       title: 'Full-Stack Developer at KD Global Management',
-      description: 'Currently working as a Full-Stack Developer, developing and <br> maintaining web applications using modern technologies.',
+      description: 'Developing and maintaining front-end and back-end web applications using modern technologies.',
     }
   ];
 
   const hobbies = [
-    { icon: <Lightbulb size={24} />, name: 'UI/UX Design', description: 'Creating beautiful interfaces', color: 'from-primary-500 to-mint-400' },
-    { icon: <Users size={24} />, name: 'Team Collaboration', description: 'Working with diverse teams', color: 'from-mint-500 to-neon-400' },
-    { icon: <Coffee size={24} />, name: 'Focus & Code', description: 'Maintaining concentration for effective coding', color: 'from-neon-500 to-primary-400' },
+    { icon: <PenTool size={24} />, name: 'UI/UX Design', description: 'Creating beautiful interfaces that are simple and user-friendly.', color: 'from-primary-500 to-mint-400' },
+    { icon: <Users size={24} />, name: 'Team Collaboration', description: 'Working with diverse teams to build great things.', color: 'from-mint-500 to-neon-400' },
+    { icon: <Code2 size={24} />, name: 'Focus & Code', description: 'Maintaining concentration for effective coding', color: 'from-neon-500 to-primary-400' },
     { icon: <Music size={24} />, name: 'Research', description: 'Exploring emerging technologies and innovative ideas.', color: 'from-primary-500 to-purple-400' },
   ];
 
@@ -136,37 +137,38 @@ const About = () => {
         </section>
 
 
-        {/* Hobbies & Interests */}
-        <motion.div
-          initial={{ y: 50, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-        >
-          <h3 className="text-3xl font-bold font-poppins text-center mb-12 gradient-text">{t("When I'm Not Coding")}</h3>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <section id="interests" className="interests-section" aria-labelledby="interests-heading">
+          <div className="interests-dots" aria-hidden="true" />
+          <div className="interests-heading">
+            <span className="interests-eyebrow"><User size={18} aria-hidden="true" />{t('Beyond Coding')}</span>
+            <h3 id="interests-heading">{language === 'en' ? <>When I'm <span>Not Coding</span></> : t("When I'm Not Coding")}</h3>
+            <div className="interests-rule" aria-hidden="true" />
+            <p>{t('I enjoy exploring new interests, spending time with my team, and keeping my mind balanced.')}</p>
+          </div>
+          <div className="interests-grid">
             {hobbies.map((hobby, index) => (
-              <motion.div
-                key={index}
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="glassmorphism rounded-xl p-6 text-center hover:shadow-lg transition-all duration-300"
-              >
-                <div className={`w-12 h-12 bg-gradient-to-r ${hobby.color} rounded-full flex items-center justify-center mx-auto mb-4 text-white`}>
-                  {hobby.icon}
-                </div>
-                <h4 className="font-semibold mb-2">{t(hobby.name)}</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-300">{t(hobby.description)}</p>
-              </motion.div>
+              <article key={hobby.name} className={`interest-card interest-card-${index + 1}`}>
+                <span className="interest-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                <span className="interest-icon" aria-hidden="true">{hobby.icon}</span>
+                <h4>{t(hobby.name)}</h4>
+                <p>{t(hobby.description)}</p>
+              </article>
             ))}
           </div>
-        </motion.div>
+        </section>
+
       </div>
     </section>
   );
 };
 
 export default About;
+
+
+
+
+
+
 
 
 
