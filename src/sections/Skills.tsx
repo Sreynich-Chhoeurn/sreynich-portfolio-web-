@@ -1,39 +1,41 @@
 import React, { useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Code2, Database, Monitor, Server, Settings, LayoutGrid, Lightbulb, Users, Rocket, FileText, Palette, BarChart3, Workflow, Terminal, MessageSquare, Target, Clock } from 'lucide-react';
-import { SiWordpress, SiHtml5, SiBootstrap, SiTailwindcss, SiJavascript, SiVuedotjs, SiTypescript, SiNodedotjs, SiPhp, SiLaravel, SiMysql, SiGit, SiFlutter } from 'react-icons/si';
+import { SiWordpress, SiHtml5, SiBootstrap, SiTailwindcss, SiJavascript, SiVuedotjs, SiTypescript, SiNextdotjs, SiNodedotjs, SiPhp, SiLaravel, SiMysql, SiPostgresql, SiGit, SiFlutter } from 'react-icons/si';
 import { useLanguage } from '../context/LanguageContext';
 import '../styles/skills.css';
 import '../styles/soft-skills.css';
 import { RefreshCw, Flag, ShieldCheck, ArrowRight } from 'lucide-react';
 
 const skills = [
-  { name: 'Responsive Design', level: null, category: 'Frontend', icon: Monitor, color: '#168da4', detail: 'Layouts for every screen size' },
-  { name: 'Prototyping', level: null, category: 'Frontend', icon: Palette, color: '#9060da', detail: 'Interactive design prototypes' },
-  { name: 'OOP', level: null, category: 'Backend', icon: Workflow, color: '#5482c4', detail: 'Object-oriented programming' },
-  { name: 'VS Code', level: null, category: 'Tools', icon: Code2, color: '#168be0', detail: 'Code editor' },
-  { name: 'Figma', level: null, category: 'Tools', icon: Palette, color: '#9060da', detail: 'Interface design & prototyping' },
-  { name: 'Jira', level: null, category: 'Tools', icon: LayoutGrid, color: '#3178c6', detail: 'Project & issue tracking' },
-  { name: 'AI Tools', level: null, category: 'Tools', icon: Lightbulb, color: '#009f90', detail: 'AI-assisted development' },
-  { name: 'Vercel', level: null, category: 'Tools', icon: Rocket, color: '#5482c4', detail: 'Web hosting & deployment' },
-  { name: 'HTML / CSS', level: 69, category: 'Frontend', icon: SiHtml5, color: '#ef572b', detail: 'Markup & responsive styling' },
-  { name: 'JavaScript', level: 54, category: 'Frontend', icon: SiJavascript, color: '#bd9100', detail: 'Interactive web experiences' },
-  { name: 'TypeScript (OOP)', level: 70, category: 'Frontend', icon: SiTypescript, color: '#3178c6', detail: 'Type-safe development' },
-  { name: 'Vue.js', level: 66, category: 'Frontend', icon: SiVuedotjs, color: '#229e75', detail: 'Component-based interfaces' },
-  { name: 'Tailwind CSS', level: 55, category: 'Frontend', icon: SiTailwindcss, color: '#06a7bd', detail: 'Utility-first CSS framework' },
-  { name: 'Bootstrap 5', level: 65, category: 'Frontend', icon: SiBootstrap, color: '#8050ca', detail: 'Responsive UI components' },
-  { name: 'Node.js', level: 73, category: 'Backend', icon: SiNodedotjs, color: '#438c3c', detail: 'Server-side JavaScript' },
-  { name: 'Laravel', level: 70, category: 'Backend', icon: SiLaravel, color: '#ef4936', detail: 'PHP framework for web apps' },
-  { name: 'PHP', level: 60, category: 'Backend', icon: SiPhp, color: '#777bb4', detail: 'Server-side scripting' },
-  { name: 'MySQL (Database)', level: 67, category: 'Database', icon: SiMysql, color: '#007899', detail: 'Relational database management' },
-  { name: 'Flutter', level: 60, category: 'Frontend', icon: SiFlutter, color: '#178bd0', detail: 'Cross-platform interfaces' },
-  { name: 'WordPress', level: 70, category: 'Tools', icon: SiWordpress, color: '#21759b', detail: 'Website content management' },
-  { name: 'Git / GitHub', level: 75, category: 'Tools', icon: SiGit, color: '#ee5535', detail: 'Version control & collaboration' },
-  { name: 'UI Design', level: 72, category: 'Tools', icon: Palette, color: '#9060da', detail: 'Interface design & prototyping' },
-  { name: 'Laragon', level: 70, category: 'Tools', icon: Terminal, color: '#169eaf', detail: 'Local development environment' },
-  { name: 'Microsoft Office', level: 70, category: 'Tools', icon: FileText, color: '#d96835', detail: 'Documents & productivity' },
-  { name: 'Data Analytics (Power BI)', level: 58, category: 'Tools', icon: BarChart3, color: '#b99015', detail: 'Data analysis & visualization' },
-  { name: 'Algorithms', level: 58, category: 'Tools', icon: Workflow, color: '#5482c4', detail: 'Logic & problem solving' },
+  { name: 'Responsive Design', category: 'Frontend', icon: Monitor, color: '#168da4', detail: 'Responsive layouts for desktop, tablet, and mobile' },
+  { name: 'Prototyping', category: 'Frontend', icon: Palette, color: '#9060da', detail: 'Interactive UI flows and design validation' },
+  { name: 'OOP', category: 'Backend', icon: Workflow, color: '#5482c4', detail: 'Structured and maintainable application design' },
+  { name: 'VS Code', category: 'Tools', icon: Code2, color: '#168be0', detail: 'Code editing, debugging, and extensions' },
+  { name: 'Figma', category: 'Tools', icon: Palette, color: '#9060da', detail: 'Interface design and collaborative prototyping' },
+  { name: 'Jira', category: 'Tools', icon: LayoutGrid, color: '#3178c6', detail: 'Project planning and issue tracking' },
+  { name: 'AI Tools', category: 'Tools', icon: Lightbulb, color: '#009f90', detail: 'AI-assisted development and productivity' },
+  { name: 'Vercel', category: 'Tools', icon: Rocket, color: '#5482c4', detail: 'Frontend deployment and web hosting' },
+  { name: 'HTML / CSS', category: 'Frontend', icon: SiHtml5, color: '#ef572b', detail: 'Responsive layouts and modern web styling' },
+  { name: 'JavaScript', category: 'Frontend', icon: SiJavascript, color: '#bd9100', detail: 'Interactive web applications and client-side development' },
+  { name: 'TypeScript (OOP)', category: 'Frontend', icon: SiTypescript, color: '#3178c6', detail: 'Type-safe application development' },
+  { name: 'Vue.js', category: 'Frontend', icon: SiVuedotjs, color: '#229e75', detail: 'Component-based frontend application development' },
+  { name: 'Tailwind CSS', category: 'Frontend', icon: SiTailwindcss, color: '#06a7bd', detail: 'Responsive utility-first UI development' },
+  { name: 'Bootstrap 5', category: 'Frontend', icon: SiBootstrap, color: '#8050ca', detail: 'Responsive UI components and layout utilities' },
+  { name: 'Next.js', category: 'Frontend', icon: SiNextdotjs, color: '#111827', detail: 'React framework for modern web applications' },
+  { name: 'Node.js', category: 'Backend', icon: SiNodedotjs, color: '#438c3c', detail: 'REST APIs and backend services' },
+  { name: 'Laravel', category: 'Backend', icon: SiLaravel, color: '#ef4936', detail: 'Backend web applications and REST APIs' },
+  { name: 'PHP', category: 'Backend', icon: SiPhp, color: '#777bb4', detail: 'Server-side web application development' },
+  { name: 'MySQL (Database)', category: 'Database', icon: SiMysql, color: '#007899', detail: 'Relational data modeling and queries' },
+  { name: 'PostgreSQL', category: 'Database', icon: SiPostgresql, color: '#336791', detail: 'Relational data modeling and queries' },
+  { name: 'Flutter', category: 'Frontend', icon: SiFlutter, color: '#178bd0', detail: 'Cross-platform mobile application development' },
+  { name: 'WordPress', category: 'Tools', icon: SiWordpress, color: '#21759b', detail: 'Content-managed website development' },
+  { name: 'Git / GitHub', category: 'Tools', icon: SiGit, color: '#ee5535', detail: 'Version control and team collaboration' },
+  { name: 'UI Design', category: 'Tools', icon: Palette, color: '#9060da', detail: 'Usable interface design and visual systems' },
+  { name: 'Laragon', category: 'Tools', icon: Terminal, color: '#169eaf', detail: 'Local PHP development environment' },
+  { name: 'Microsoft Office', category: 'Tools', icon: FileText, color: '#d96835', detail: 'Documents, presentations, and productivity' },
+  { name: 'Data Analytics (Power BI)', category: 'Tools', icon: BarChart3, color: '#b99015', detail: 'Data analysis and visual reporting' },
+  { name: 'Algorithms', category: 'Tools', icon: Workflow, color: '#5482c4', detail: 'Problem solving and application logic' },
 ];
 const filters = [
   { name: 'All Skills', icon: LayoutGrid }, { name: 'Frontend', icon: Monitor },
@@ -71,9 +73,7 @@ export default function Skills() {
                 <div className="skill-tile-top">
                   <span className="skill-brand" style={{ color: skill.color }}><skill.icon size={30} aria-hidden="true" /></span>
                   <div className="skill-label"><h3>{t(skill.name)}</h3><p>{t(skill.detail)}</p></div>
-                  {skill.level !== null && <span className="skill-percentage">{skill.level}%</span>}
                 </div>
-                {skill.level !== null && <div className="skill-meter" role="meter" aria-label={t(skill.name)} aria-valuemin={0} aria-valuemax={100} aria-valuenow={skill.level}><span style={{ width: `${skill.level}%` }} /></div>}
                 <span className={`skill-category skill-category-${skill.category.toLowerCase()}`}>{t(skill.category)}</span>
               </motion.article>)}
             </div>

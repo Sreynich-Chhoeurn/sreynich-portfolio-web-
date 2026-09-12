@@ -11,7 +11,7 @@ const Home = () => {
       <div className="portfolio-container">
         <div className="hero-layout">
           <div className="hero-copy">
-            <p className="hero-greeting">{t("Hello, I'm")} <span aria-hidden="true">👋</span></p>
+            <p className="hero-greeting">{t("Hello, I'm")}</p>
             <h1 id="hero-name" className="hero-name">
               <span>{t(language === 'km' ? 'Chhoeurn' : 'Sreynich')}</span>{' '}
               <span className="hero-surname" lang={language}>{t(language === 'km' ? 'Sreynich' : 'Chhoeurn')}</span>

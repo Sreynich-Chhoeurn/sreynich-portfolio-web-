@@ -1,15 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Download, Menu, Moon, Sun, X } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
 
 const navItems = [
-  { name: 'Home', href: '#home' },
-  { name: 'About', href: '#about' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Resume', href: '#resume' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'Home', to: '/', section: 'home' },
+  { name: 'About', to: '/#about', section: 'about' },
+  { name: 'Skills', to: '/#skills', section: 'skills' },
+  { name: 'Projects', to: '/#projects', section: 'projects' },
+  { name: 'Resume', to: '/#resume', section: 'resume' },
+  { name: 'Contact', to: '/#contact', section: 'contact' },
 ];
 
 const Navbar = () => {
@@ -18,22 +19,35 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const menuButton = useRef<HTMLButtonElement>(null);
+  const { hash, pathname } = useLocation();
 
   useEffect(() => {
+    if (pathname !== '/') {
+      setActiveSection(pathname.startsWith('/projects/') ? 'projects' : '');
+      return;
+    }
+
     const updateActiveSection = () => {
+      const hashSection = hash.slice(1);
+      if (navItems.some((item) => item.section === hashSection)) {
+        setActiveSection(hashSection);
+        return;
+      }
+
       const scrollPosition = window.scrollY + 112;
       for (const item of [...navItems].reverse()) {
-        const element = document.getElementById(item.href.slice(1));
+        const element = document.getElementById(item.section);
         if (element && scrollPosition >= element.offsetTop) {
-          setActiveSection(item.href.slice(1));
+          setActiveSection(item.section);
           break;
         }
       }
     };
+
     updateActiveSection();
     window.addEventListener('scroll', updateActiveSection, { passive: true });
     return () => window.removeEventListener('scroll', updateActiveSection);
-  }, []);
+  }, [hash, pathname]);
 
   useEffect(() => {
     const desktop = window.matchMedia('(min-width: 1200px)');
@@ -51,12 +65,12 @@ const Navbar = () => {
     }}>
       <a className="portfolio-skip" href="#main-content">{t('Skip to content')}</a>
       <div className="portfolio-container header-layout">
-        <a className="portfolio-brand" href="#home" aria-label={t('Sreynich Chhoeurn — Home')} onClick={() => setIsOpen(false)}>
+        <Link className="portfolio-brand" to="/" aria-label={t('Sreynich Chhoeurn — Home')} onClick={() => setIsOpen(false)}>
           <span className="portfolio-monogram" lang={language}>{t('SC')}</span>
-        </a>
+        </Link>
         <nav className="header-desktop-nav" aria-label={t('Main navigation')}>
           {navItems.map((item) => (
-            <a href={item.href} key={item.href} aria-current={activeSection === item.href.slice(1) ? 'location' : undefined}>{t(item.name)}</a>
+            <Link key={item.to} to={item.to} aria-current={activeSection === item.section ? 'location' : undefined}>{t(item.name)}</Link>
           ))}
         </nav>
         <div className="header-controls">
@@ -77,7 +91,7 @@ const Navbar = () => {
         </div>
       </div>
       <nav className="header-mobile-nav" id="mobile-navigation" aria-label={t('Mobile navigation')} hidden={!isOpen}>
-        {navItems.map((item) => <a key={item.href} href={item.href} aria-current={activeSection === item.href.slice(1) ? 'location' : undefined} onClick={() => setIsOpen(false)}>{t(item.name)}</a>)}
+        {navItems.map((item) => <Link key={item.to} to={item.to} aria-current={activeSection === item.section ? 'location' : undefined} onClick={() => setIsOpen(false)}>{t(item.name)}</Link>)}
         <a href="/Sreynich_Chhoeurn_CV.pdf" download onClick={() => setIsOpen(false)}>{t('Download CV')} <Download size={17} aria-hidden="true" /></a>
       </nav>
     </header>

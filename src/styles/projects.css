@@ -29,6 +29,7 @@
 .project-links a { display: inline-flex; justify-content: center; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; min-height: 38px; padding: 8px 12px; border-radius: 10px; }
 .project-live { color: #fff; background: #009f90; }
 .project-code { color: var(--portfolio-ink); background: var(--portfolio-soft); }
+.project-detail-link { color: var(--portfolio-teal); background: #00aa9810; border: 1px solid #00aa9825; }
 .project-unavailable { font-size: 11px; color: var(--portfolio-muted); }
 .projects-filters button:focus-visible, .project-links a:focus-visible { outline: 3px solid var(--portfolio-teal); outline-offset: 3px; }
 html[lang='km'] .projects-heading h2 { font-family: 'Battambang', sans-serif; line-height: 1.6; letter-spacing: 0; }
@@ -63,6 +64,7 @@ html[lang='km'] .project-card h3, html[lang='km'] .project-description { line-he
   .project-live:hover { background: #008779; box-shadow: 0 4px 12px #009f9020; }
   .project-live:hover svg:last-child { transform: translate(2px, -2px); }
   .project-code:hover { color: var(--portfolio-teal); background: #00aa9810; }
+  .project-detail-link:hover { background: #00aa981b; }
   .projects-filters button:not([aria-pressed='true']):hover { color: var(--portfolio-teal); background: #00aa9810; }
 }
 @media (max-width: 1050px) { .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; } }
